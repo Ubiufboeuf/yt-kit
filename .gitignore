@@ -1,0 +1,25 @@
+# Dependencias
+node_modules/
+
+# Output
+out
+dist
+*.tgz
+
+# Logs
+logs
+_.log
+report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
+
+# Cachés
+.eslintcache
+.cache
+*.tsbuildinfo
+
+# Específico del proyecto
+bin/
+storage/
+
+# Otros
+.idea
+.DS_Store
