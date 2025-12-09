@@ -1,9 +1,9 @@
 // Funcionalidades del programa
-export * from './tasks/download/downloadVideo'
+export * from '@core/tasks/download/downloadVideo'
 
 // Tipos
-export * from './types/videoTypes'
-export * from './types/processTypes'
+export * from '@core/types/videoTypes'
+export * from '@core/types/processTypes'
 
 // Constantes públicas (seguras de exportar)
-export { STANDARD_RESOLUTIONS } from './lib/constants'
+export { STANDARD_RESOLUTIONS } from '@core/lib/constants'

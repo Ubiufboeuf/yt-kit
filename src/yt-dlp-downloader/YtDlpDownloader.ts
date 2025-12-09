@@ -1,6 +1,6 @@
-import type { Downloader, DownloadOptions, DownloadResult } from '../interfaces/Downloader'
-import { RUTAS } from '../lib/constants'
-import { spawnAsync } from '../lib/spawnAsync'
+import type { Downloader, DownloadOptions, DownloadResult } from '@core/interfaces/Downloader'
+import { RUTAS } from '@core/lib/constants'
+import { spawnAsync } from '@core/lib/spawnAsync'
 
 export class YtDlpDownloader implements Downloader {
   async download (url: string, options: DownloadOptions): Promise<DownloadResult> {
