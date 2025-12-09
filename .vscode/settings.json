@@ -4,6 +4,7 @@
     "library",
     "service",
     "step",
-    "config"
+    "config",
+    "build"
   ]
 }
