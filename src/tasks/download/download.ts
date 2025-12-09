@@ -27,7 +27,7 @@ export async function downloadAudio (ytId: string, options: DownloadOptions) {
 function formDownloadTaskOptions (type: DownloadType, options: DownloadOptions): DownloadTasksOptions {
   const taskOptions: DownloadTasksOptions = {
     id: options.id,
-    type: 'video',
+    type,
     outputFolder: options.outputFolder ?? '.',
     filename: options.filename ?? DEFAULT_FILENAME
   }
