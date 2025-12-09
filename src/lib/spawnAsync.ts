@@ -1,6 +1,6 @@
 import { spawn } from 'node:child_process'
-import type { CommandKey } from '@core/types/processTypes'
-import { COMMANDS } from '@core/lib/constants'
+import type { CommandKey } from '../types/processTypes'
+import { COMMANDS } from '../lib/constants'
 
 export function spawnAsync (command: CommandKey, args: string[], showOutput?: boolean) {
   const _command = COMMANDS[command]

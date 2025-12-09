@@ -8,10 +8,7 @@
     "outDir": "dist",
     "module": "ESNext",
     "moduleResolution": "Node",
-    "stripInternal": true,
-    "paths": {
-      "@core": ["dist/*"]
-    }
+    "stripInternal": true
   },
   "include": ["src"]
 }
