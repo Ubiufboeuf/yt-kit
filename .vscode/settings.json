@@ -3,6 +3,7 @@
     "interface",
     "library",
     "service",
-    "step"
+    "step",
+    "config"
   ]
 }
