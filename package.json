@@ -1,8 +1,14 @@
 {
-  "name": "yt-kit",
+  "name": "@yt-kit/core",
+  "version": "0.1.0",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "start": "bun pruebas.ts"
+    "start": "bun pruebas.ts",
+    "build": "tsc",
+    "prepublishOnly": "bun run build"
   },
   "dependencies": {
     "eslint": "9.39.1",
