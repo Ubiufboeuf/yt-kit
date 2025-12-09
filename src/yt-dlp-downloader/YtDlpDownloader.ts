@@ -1,5 +1,4 @@
 import type { Downloader, DownloadTasksOptions, DownloadResult } from '../interfaces/Downloader'
-import { RUTAS } from '../lib/constants'
 import { spawnAsync } from '../lib/spawnAsync'
 
 export class YtDlpDownloader implements Downloader {
