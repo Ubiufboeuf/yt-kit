@@ -4,3 +4,4 @@ export const COMMANDS = {
   'yt-dlp': 'yt-dlp-linux'
 } as const
 
+export const DEFAULT_FILENAME = '%(id)s.%(ext)s'

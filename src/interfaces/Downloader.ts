@@ -5,12 +5,14 @@ export interface Downloader {
 export interface DownloadOptions {
   id: string
   outputFolder?: string
+  filename?: string
 }
 
 export interface DownloadTasksOptions {
   id: string
   type: 'video' | 'audio'
   outputFolder: string
+  filename: string
 }
 
 export interface DownloadResult {

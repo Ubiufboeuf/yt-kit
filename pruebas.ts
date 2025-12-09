@@ -3,5 +3,6 @@
 import { downloadVideo } from './src/tasks/download/downloadVideo'
 
 await downloadVideo('wKVJi-FLvak', {
-  id: '135'
+  id: '135',
+  filename: 'lol.mp4'
 })
