@@ -4,7 +4,7 @@ export const COMMANDS = {
   'yt-dlp': 'yt-dlp-linux'
 } as const
 
-const KWD = '/home/mango/Dev/yt-media-kit' as const // KWD: [K]it [W]orking [D]irectory
+const KWD = '/home/mango/Dev/yt-kit' as const // KWD: [K]it [W]orking [D]irectory
 
 export const RUTAS = {
   VIDEOS_DESCARGADOS: `${KWD}/storage/videos_descargados`,
