@@ -1,5 +1,5 @@
 // Funcionalidades del programa
-export * from './tasks/download/downloadVideo'
+export * from './tasks/download/download'
 
 // Tipos
 export * from './types/videoTypes'
