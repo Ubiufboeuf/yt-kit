@@ -2,4 +2,6 @@
 
 import { downloadVideo } from './src/tasks/download/downloadVideo'
 
-await downloadVideo('wKVJi-FLvak', '135')
+await downloadVideo('wKVJi-FLvak', {
+  id: '135'
+})

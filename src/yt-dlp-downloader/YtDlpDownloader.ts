@@ -1,9 +1,9 @@
-import type { Downloader, DownloadOptions, DownloadResult } from '../interfaces/Downloader'
+import type { Downloader, DownloadTasksOptions, DownloadResult } from '../interfaces/Downloader'
 import { RUTAS } from '../lib/constants'
 import { spawnAsync } from '../lib/spawnAsync'
 
 export class YtDlpDownloader implements Downloader {
-  async download (url: string, options: DownloadOptions): Promise<DownloadResult> {
+  async download (url: string, options: DownloadTasksOptions): Promise<DownloadResult> {
     const args = this.buildYtDlpArgs(url, options)
 
     // const result = await spawnAsync('yt-dlp', args, true)
@@ -15,7 +15,7 @@ export class YtDlpDownloader implements Downloader {
     }
   }
 
-  private buildYtDlpArgs (url: string, options: DownloadOptions) {
+  private buildYtDlpArgs (url: string, options: DownloadTasksOptions) {
     const { id, type } = options
     const isVideo = type === 'video'
     
@@ -23,9 +23,7 @@ export class YtDlpDownloader implements Downloader {
       ? 'mp4'
       : 'aac'
     
-    const exportRoute = isVideo
-      ? RUTAS.VIDEOS_DESCARGADOS
-      : RUTAS.AUDIOS_DESCARGADOS
+    const exportRoute = options.outputFolder
     
     const exportName = '%(id)s.%(ext)s'
 
