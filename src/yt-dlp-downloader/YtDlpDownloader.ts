@@ -24,9 +24,7 @@ export class YtDlpDownloader implements Downloader {
       : 'aac'
     
     const exportRoute = options.outputFolder
-    
     const exportName = '%(id)s.%(ext)s'
-
     const audioFormat = 'aac'
     
     const args = [
