@@ -5,9 +5,15 @@
   "publishConfig": {
     "access": "public"
   },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "start": "bun pruebas.ts",
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "prepublishOnly": "bun run build"
   },
   "dependencies": {
