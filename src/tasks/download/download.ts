@@ -4,11 +4,18 @@ import { DEFAULT_FILENAME } from 'src/lib/constants'
 import type { DownloadOptions, DownloadTasksOptions } from '../../interfaces/Downloader'
 import { formYoutubeUrl } from '../../lib/ytUtils'
 import { YtDlpDownloader } from '../../yt-dlp-downloader/YtDlpDownloader'
+import type { DownloadType } from 'src/types/downloadTypes'
 
 export async function downloadVideo (ytId: string, options: DownloadOptions) {
   if (!ytId || !options.id) return
 
   const url = formYoutubeUrl(ytId)
+  const taskOptions = formDownloadTaskOptions('video', options)
+
+  return new YtDlpDownloader().download(url, taskOptions)
+}
+
+function formDownloadTaskOptions (type: DownloadType, options: DownloadOptions): DownloadTasksOptions {
   const taskOptions: DownloadTasksOptions = {
     id: options.id,
     type: 'video',
@@ -16,5 +23,5 @@ export async function downloadVideo (ytId: string, options: DownloadOptions) {
     filename: options.filename ?? DEFAULT_FILENAME
   }
 
-  return new YtDlpDownloader().download(url, taskOptions)
+  return taskOptions
 }
