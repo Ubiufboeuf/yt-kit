@@ -2,6 +2,7 @@
   "conventionalCommits.scopes": [
     "interface",
     "library",
-    "service"
+    "service",
+    "step"
   ]
 }
