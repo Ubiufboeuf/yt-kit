@@ -1,6 +1,9 @@
 {
   "name": "yt-kit",
   "type": "module",
+  "scripts": {
+    "start": "bun pruebas.ts"
+  },
   "dependencies": {
     "eslint": "9.39.1",
     "typescript": "5"
