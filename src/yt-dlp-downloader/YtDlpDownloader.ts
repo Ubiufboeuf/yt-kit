@@ -18,7 +18,6 @@ export class YtDlpDownloader implements Downloader {
     const { id, type } = options
     const isVideo = type === 'video'
     
-    const ext = isVideo ? 'mp4' : 'aac'
     const exportRoute = options.outputFolder
     const exportName = options.filename
     const audioFormat = 'aac'
@@ -27,7 +26,7 @@ export class YtDlpDownloader implements Downloader {
       : ['-x', '--audio-format', audioFormat]
 
     const args = [
-      '-f', `${id}/${ext}`,
+      '-f', id,
       ...audioFormatPreferences,
       '-o', exportName,
       '-P', exportRoute,
