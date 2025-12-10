@@ -4,7 +4,7 @@ import { DEFAULT_FILENAME } from 'src/lib/constants'
 import type { DownloadOptions, DownloadTasksOptions } from '../../interfaces/Downloader'
 import { formYoutubeUrl } from '../../lib/ytUtils'
 import { YtDlpDownloader } from '../../yt-dlp-downloader/YtDlpDownloader'
-import type { DownloadType } from 'src/types/downloadTypes'
+import type { DownloadType } from 'src/types/downloaderTaskTypes'
 
 export async function downloadVideo (ytId: string, options: DownloadOptions) {
   if (!ytId || !options.id) return
