@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process'
-import type { CommandKey } from '../types/processTypes'
+import type { CommandKey } from '../types/childProcessTypes'
 import { COMMANDS } from '../lib/constants'
 import { streamLog } from './logs'
 
