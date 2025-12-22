@@ -1,6 +1,6 @@
 import type { Downloader, DownloadTasksOptions, DownloadResult } from '../interfaces/Downloader'
 import { spawnAsync } from '../lib/spawnAsync'
-import { resolveFilename } from 'src/lib/resolveFilename'
+import { resolveFilename } from '../lib/resolveFilename'
 
 export class YtDlpDownloader implements Downloader {
   async download (url: string, ytId: string, options: DownloadTasksOptions): Promise<DownloadResult> {
