@@ -5,7 +5,10 @@
     "service",
     "step",
     "config",
-    "build"
+    "build",
+    "patch",
+    "minor",
+    "mayor",
   ],
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.importModuleSpecifierEnding": "auto",
