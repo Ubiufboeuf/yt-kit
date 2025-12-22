@@ -1,5 +1,5 @@
 export interface Downloader {
-  download (url: string, options: DownloadTasksOptions): Promise<DownloadResult>
+  download (url: string, ytId: string, options: DownloadTasksOptions): Promise<DownloadResult>
 }
 
 export interface DownloadOptions {

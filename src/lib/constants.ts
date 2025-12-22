@@ -5,3 +5,7 @@ export const COMMANDS = {
 } as const
 
 export const DEFAULT_FILENAME = '%(id)s.%(ext)s'
+export const PATTERNS = {
+  ID: '%(id)s',
+  YT_ID: '%(ytId)s'
+} as const

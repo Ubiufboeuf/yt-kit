@@ -12,7 +12,7 @@ export async function downloadVideo (ytId: string, options: DownloadOptions) {
   const url = formYoutubeUrl(ytId)
   const taskOptions = formDownloadTaskOptions('video', options)
 
-  return new YtDlpDownloader().download(url, taskOptions)
+  return new YtDlpDownloader().download(url, ytId, taskOptions)
 }
 
 export async function downloadAudio (ytId: string, options: DownloadOptions) {
@@ -21,7 +21,7 @@ export async function downloadAudio (ytId: string, options: DownloadOptions) {
   const url = formYoutubeUrl(ytId)
   const taskOptions = formDownloadTaskOptions('audio', options)
 
-  return new YtDlpDownloader().download(url, taskOptions)
+  return new YtDlpDownloader().download(url, ytId, taskOptions)
 }
 
 function formDownloadTaskOptions (type: DownloadType, options: DownloadOptions): DownloadTasksOptions {
