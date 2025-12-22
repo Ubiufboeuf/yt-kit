@@ -6,9 +6,10 @@ const ytId = 'wKVJi-FLvak'
 
 await downloadVideo(ytId, {
   id: '135',
-  filename: 'lol.mp4'
+  outputPath: 'storage/downloads'
 })
 
 await downloadAudio(ytId, {
-  id: '251'
+  id: '251',
+  outputPath: 'storage/downloads'
 })
