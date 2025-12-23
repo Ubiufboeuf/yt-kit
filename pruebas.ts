@@ -1,15 +1,20 @@
 // Acá voy a ir probando el core de primeras, para no tener que navegar mucho para probar el código
 
-import { downloadVideo, downloadAudio } from './src/tasks/download/download'
+import { formYoutubeUrl } from './src/lib/ytUtils'
+import { YtDlpDownloader } from './src/yt-dlp-downloader/YtDlpDownloader'
 
 const ytId = 'wKVJi-FLvak'
+const url = formYoutubeUrl(ytId)
 
-await downloadVideo(ytId, {
-  id: '135',
-  outputPath: 'storage/downloads'
-})
+const bestVideo = new YtDlpDownloader().findFormatId(url, 'best-video')
+const worstVideo = new YtDlpDownloader().findFormatId(url, 'worst-video')
+const bestAudio = new YtDlpDownloader().findFormatId(url, 'best-audio')
+const worstAudio = new YtDlpDownloader().findFormatId(url, 'worst-audio')
 
-await downloadAudio(ytId, {
-  id: '251',
-  outputPath: 'storage/downloads'
-})
+bestVideo.then(({ foundSpecific, formatId }) => console.log('bestVideo:', { formatId, foundSpecific }))
+worstVideo.then(({ foundSpecific, formatId }) => console.log('worstVideo:', { formatId, foundSpecific }))
+bestAudio.then(({ foundSpecific, formatId }) => console.log('bestAudio:', { formatId, foundSpecific }))
+worstAudio.then(({ foundSpecific, formatId }) => console.log('worstAudio:', { formatId, foundSpecific }))
+
+// const video = new YtDlpDownloader().findFormatId(url, '360p')
+// console.log('video:', await video)
