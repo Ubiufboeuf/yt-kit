@@ -1,3 +1,5 @@
+import type { CacheMethod } from '../config/cache'
+
 export type ConfigKey = keyof ConfigMap
 export type ConfigValue<T extends ConfigKey> = ConfigMap[T]
 
@@ -6,6 +8,6 @@ export type ConfigMap = {
 }
 
 export interface CacheConfig {
-  method: 'hybrid' | 'memory' | 'disk'
+  method: CacheMethod
   cacheLocation?: string
 }
