@@ -11,6 +11,14 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ubiufboeuf/yt-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ubiufboeuf/yt-kit/issues"
+  },
+  "homepage": "https://github.com/ubiufboeuf/yt-kit#readme",
   "scripts": {
     "start": "bun pruebas.ts",
     "build": "tsc -p tsconfig.build.json",
