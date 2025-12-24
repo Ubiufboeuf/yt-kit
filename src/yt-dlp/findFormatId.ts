@@ -2,19 +2,41 @@ import type { FormatsToFind } from '../types/videoTypes'
 import type { YtDlpFormat } from '../types/ytDlpFormatTypes'
 import { getBetterFormat, getWorstFormat } from '../lib/compareFormats'
 import { spawnAsync } from '../lib/spawnAsync'
+import { getFromCache } from '../cache/getFromCache'
+import { formYoutubeUrl } from '../lib/ytUtils'
+import { saveInCache } from '../cache/saveInCache'
 
-export async function findFormatId (url: string, formatToFind: FormatsToFind) {
+export async function findFormatId (ytId: string, formatToFind: FormatsToFind) {
+  const url = formYoutubeUrl(ytId)
+  const formatsCacheKey = `formats-${ytId}`
+
   const isSpecificResolution = Boolean(formatToFind.match(/\d/))
   let foundSpecific = isSpecificResolution ? false : 'N/A'
 
   const args = ['--print', '%(formats)j', url]
   
-  let output: string = ''
-  try {  
-    output = await spawnAsync('yt-dlp', args) as string
-  } catch (err) {
-    console.error('Error consiguiendo el ID del formato')
-    throw err
+  const cachedOutput = getFromCache(formatsCacheKey)
+  let output: string = cachedOutput?.content ?? ''
+
+  if (!output) {  
+    let processOutput: unknown
+    try {
+      processOutput = await spawnAsync('yt-dlp', args)
+    } catch (err) {
+      console.error('Error consiguiendo el ID del formato')
+      throw err
+    }
+
+    if (typeof processOutput !== 'string') {
+      throw new Error('La salida del proceso es de tipo inválido (se esperaba string)')
+    }
+
+    output = processOutput
+    
+    saveInCache(formatsCacheKey, {
+      content: output,
+      timestamp: Date.now()
+    })
   }
 
   let formats: YtDlpFormat[] = []
