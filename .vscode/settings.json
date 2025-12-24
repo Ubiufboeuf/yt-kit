@@ -1,14 +1,12 @@
 {
   "conventionalCommits.scopes": [
-    "interface",
-    "library",
-    "service",
-    "step",
-    "config",
-    "build",
     "patch",
     "minor",
     "mayor",
+    "cache",
+    "build",
+    "config",
+    "commit-scope"
   ],
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.importModuleSpecifierEnding": "auto",
