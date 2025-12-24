@@ -1,9 +1,6 @@
 import type { Downloader, DownloadTasksOptions, DownloadResult } from '../interfaces/Downloader'
 import { spawnAsync } from '../lib/spawnAsync'
 import { resolveFilename } from '../lib/resolveFilename'
-import type { FormatsToFind } from '../types/videoTypes'
-import type { YtDlpFormat } from '../types/ytDlpFormatTypes'
-import { getBetterFormat, getWorstFormat } from '../lib/compareFormats'
 
 export class YtDlpDownloader implements Downloader {
   async download (url: string, ytId: string, options: DownloadTasksOptions): Promise<DownloadResult> {
@@ -15,74 +12,6 @@ export class YtDlpDownloader implements Downloader {
     return {
       duration: -1,
       path: 'unknown'
-    }
-  }
-
-  async findFormatId (url: string, formatToFind: FormatsToFind) {
-    const isSpecificResolution = Boolean(formatToFind.match(/\d/))
-    let foundSpecific = isSpecificResolution ? false : 'N/A'
-
-    const args = ['--print', '%(formats)j', url]
-    
-    let output: string = ''
-    try {  
-      output = await spawnAsync('yt-dlp', args) as string
-    } catch (err) {
-      console.error('Error consiguiendo el ID del formato')
-      throw err
-    }
-
-    let formats: YtDlpFormat[] = []
-    try {
-      formats = JSON.parse(output) as YtDlpFormat[]
-    } catch (err) {
-      console.error('Error convirtiendo la salida de yt-dlp a JSON')
-      throw err
-    }
-
-    if (!Array.isArray(formats)) {
-      throw new Error('Se esperaba un array')
-    }
-
-    let bestVideo: YtDlpFormat | undefined = undefined
-    let worstVideo: YtDlpFormat | undefined = undefined
-    let bestAudio: YtDlpFormat | undefined = undefined
-    let worstAudio: YtDlpFormat | undefined = undefined
-    let desiredFormat: YtDlpFormat | undefined = undefined
-
-    for (const format of formats) {
-      const audioOnly = format.resolution === 'audio only'
-      
-      if (isSpecificResolution && format.format_note === formatToFind) {
-        foundSpecific = true
-        desiredFormat = getBetterFormat(desiredFormat, format, { compareResolution: false, type: 'video' }) ?? format
-        continue
-      }
-      
-      if (audioOnly) {
-        bestAudio = getBetterFormat(bestAudio, format, { compareResolution: false, type: 'audio' }) ?? format
-        worstAudio = getWorstFormat(worstAudio, format, { compareResolution: false, type: 'audio' }) ?? format
-      } else {
-        bestVideo = getBetterFormat(bestVideo, format, { compareResolution: true, type: 'video' }) ?? format
-        worstVideo = getWorstFormat(worstVideo, format, { compareResolution: true, type: 'video' }) ?? format
-      }
-    }
-
-    if (!isSpecificResolution) {
-      const formats = {
-        'best-video': bestVideo,
-        'worst-video': worstVideo,
-        'best-audio': bestAudio,
-        'worst-audio': worstAudio
-      } as const
-
-      desiredFormat = formats[formatToFind as keyof typeof formats]
-    }
-    
-    return {
-      foundSpecific,
-      formatId: desiredFormat?.format_id,
-      desiredFormat
     }
   }
 
