@@ -1,6 +1,7 @@
 import { timeToMs } from '../lib/timeUtils'
 
-interface CachedData {
+export interface CachedData {
+  content: string
   timestamp: number
 }
 
@@ -31,3 +32,5 @@ export class CacheManager {
     this.store.delete(key)
   }
 }
+
+export const cache = new CacheManager()
