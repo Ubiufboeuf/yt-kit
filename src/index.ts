@@ -1,5 +1,9 @@
 // Funcionalidades del programa
-export * from './tasks/download/download'
+export { downloadAudio, downloadVideo } from './tasks/download/download'
+export { findFormatId } from './yt-dlp/findFormatId'
+
+// Utilidades
+export { formYoutubeUrl } from './lib/ytUtils'
 
 // Tipos
 export * from './types/videoTypes'
