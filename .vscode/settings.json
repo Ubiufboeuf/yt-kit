@@ -8,7 +8,8 @@
     "dev:config",
     "pkg:config",
     "types",
-    "commit-scope"
+    "commit-scope",
+    "rename"
   ],
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.importModuleSpecifierEnding": "auto",
