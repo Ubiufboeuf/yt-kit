@@ -8,7 +8,7 @@ interface ResolverProps {
   ytId: string
 }
 
-export function resolveFilename ({ filename, id, ytId }: ResolverProps): string {
+export function resolveFilenamePattern ({ filename, id, ytId }: ResolverProps): string {
   const map = new Map<Pattern, PatternData>([
     [PATTERNS.ID, id],
     [PATTERNS.YT_ID, ytId]

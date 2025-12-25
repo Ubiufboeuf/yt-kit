@@ -1,6 +1,6 @@
 import type { Downloader, DownloadTasksOptions, DownloadResult } from '../interfaces/Downloader'
 import { spawnAsync } from '../lib/spawnAsync'
-import { resolveFilename } from '../lib/resolveFilename'
+import { resolveFilenamePattern } from '../lib/resolveFilenamePattern'
 
 export class YtDlpDownloader implements Downloader {
   async download (url: string, ytId: string, options: DownloadTasksOptions): Promise<DownloadResult> {
@@ -20,7 +20,7 @@ export class YtDlpDownloader implements Downloader {
     const isVideo = type === 'video'
     
     const exportRoute = options.outputPath
-    const exportName = resolveFilename({ filename: options.filename, id: options.id, ytId })
+    const exportName = resolveFilenamePattern({ filename: options.filename, id: options.id, ytId })
     const audioFormat = 'aac'
     const audioFormatPreferences = isVideo
       ? []
