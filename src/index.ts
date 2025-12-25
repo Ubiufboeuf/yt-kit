@@ -13,9 +13,7 @@ export { formYoutubeUrl } from './lib/ytUtils'
 export type * from './types/videoTypes'
 export type * from './types/childProcessTypes'
 export type * from './types/configTypes'
-export type { CacheMethod } from './config/cache'
 
 // Constantes públicas (seguras de exportar)
 export { STANDARD_RESOLUTIONS } from './lib/constants'
-export { CACHE_METHOD } from './config/cache'
 
