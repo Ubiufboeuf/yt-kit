@@ -23,6 +23,6 @@ const multipliers: Record<TimeUnit, number> = {
  */
 export function timeToMs (amount: number, unit: TimeUnit): Miliseconds {
   if (!multipliers[unit]) return amount
-  const ms = multipliers[unit] * amount
+  const ms = amount * multipliers[unit]
   return ms
 }
