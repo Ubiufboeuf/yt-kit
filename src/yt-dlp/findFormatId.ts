@@ -2,9 +2,8 @@ import type { FormatsToFind } from '../types/videoTypes'
 import type { YtDlpFormat } from '../types/ytDlpFormatTypes'
 import { getBetterFormat, getWorstFormat } from '../lib/compareFormats'
 import { spawnAsync } from '../lib/spawnAsync'
-import { getFromCache } from '../cache/getFromCache'
 import { formYoutubeUrl } from '../lib/ytUtils'
-import { saveInCache } from '../cache/saveInCache'
+import { cache } from '../cache/CacheManager'
 
 export async function findFormatId (ytId: string, formatToFind: FormatsToFind) {
   const url = formYoutubeUrl(ytId)
@@ -15,7 +14,7 @@ export async function findFormatId (ytId: string, formatToFind: FormatsToFind) {
 
   const args = ['--print', '%(formats)j', url]
   
-  const cachedOutput = getFromCache(formatsCacheKey)
+  const cachedOutput = cache.get(formatsCacheKey)
   let output: string = cachedOutput?.content ?? ''
 
   if (!output) {  
@@ -33,7 +32,7 @@ export async function findFormatId (ytId: string, formatToFind: FormatsToFind) {
 
     output = processOutput
     
-    saveInCache(formatsCacheKey, {
+    cache.set(formatsCacheKey, {
       content: output,
       timestamp: Date.now()
     })
