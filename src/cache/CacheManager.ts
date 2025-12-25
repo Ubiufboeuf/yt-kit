@@ -5,6 +5,10 @@ export interface CachedData {
   timestamp: number
 }
 
+export interface ValueToCache {
+  content: string
+}
+
 export class CacheManager {
   private store = new Map<string, CachedData>()
   private defaultTtl = timeToMs(10, 'day')
@@ -21,7 +25,7 @@ export class CacheManager {
     return item
   }
 
-  set (key: string, value: CachedData) {
+  set (key: string, value: ValueToCache) {
     this.store.set(key, {
       ...value,
       timestamp: Date.now()

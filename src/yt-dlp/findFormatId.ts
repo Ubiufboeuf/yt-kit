@@ -33,8 +33,7 @@ export async function findFormatId (ytId: string, formatToFind: FormatsToFind) {
     output = processOutput
     
     cache.set(formatsCacheKey, {
-      content: output,
-      timestamp: Date.now()
+      content: output
     })
   }
 
