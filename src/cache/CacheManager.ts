@@ -1,13 +1,5 @@
 import { timeToMs } from '../lib/timeUtils'
-
-export interface CachedData {
-  content: string
-  timestamp: number
-}
-
-export interface ValueToCache {
-  content: string
-}
+import type { CachedData, ValueToCache } from '../types/cacheTypes'
 
 export class CacheManager {
   private store = new Map<string, CachedData>()
