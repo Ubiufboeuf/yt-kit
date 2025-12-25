@@ -26,3 +26,9 @@ export function timeToMs (amount: number, unit: TimeUnit): Miliseconds {
   const ms = amount * multipliers[unit]
   return ms
 }
+
+export function msToTime (ms: number, unit: TimeUnit): number {
+  if (!multipliers[unit]) return ms
+  const time = ms / multipliers[unit]
+  return time
+}
