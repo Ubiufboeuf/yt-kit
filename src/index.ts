@@ -5,14 +5,22 @@ export { Configuration } from './config/Configuration'
 // Funcionalidades del programa
 export { downloadAudio, downloadVideo } from './tasks/download/download'
 export { findFormatId } from './yt-dlp/findFormatId'
+export { getFromDisk } from './cache/getFromDisk'
+export { saveInDisk } from './cache/saveInDisk'
 
-// Utilidades
+// Helpers y utilidades
 export { formYoutubeUrl } from './lib/ytUtils'
+export { getBetterFormat, getWorstFormat } from './lib/compareFormats'
+export { resolveFilenamePattern } from './lib/resolveFilenamePattern'
+export { expandPattern } from './lib/expandPattern'
+export { resolvePath } from './lib/resolvePath'
 
 // Tipos
 export type * from './types/videoTypes'
 export type * from './types/childProcessTypes'
 export type * from './types/configTypes'
+export type * from './types/cacheTypes'
+export type { Pattern, PatternData } from './lib/expandPattern'
 
 // Constantes públicas (seguras de exportar)
 export { STANDARD_RESOLUTIONS } from './lib/constants'
