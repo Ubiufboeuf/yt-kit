@@ -2,6 +2,10 @@
 export { CacheManager } from './cache/CacheManager'
 export { Configuration } from './config/Configuration'
 
+// Instancias
+export { config } from './config/Configuration'
+export { cache } from './cache/CacheManager'
+
 // Funcionalidades del programa
 export { downloadAudio, downloadVideo } from './tasks/download/download'
 export { findFormatId } from './yt-dlp/findFormatId'
@@ -24,4 +28,3 @@ export type { Pattern, PatternData } from './lib/expandPattern'
 
 // Constantes públicas (seguras de exportar)
 export { STANDARD_RESOLUTIONS } from './lib/constants'
-
