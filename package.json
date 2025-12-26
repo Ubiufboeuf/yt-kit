@@ -21,21 +21,21 @@
   "homepage": "https://github.com/ubiufboeuf/yt-kit#readme",
   "scripts": {
     "start": "bun pruebas.ts",
-    "build": "bun build.ts && tsc -p tsconfig.build.json --emitDeclarationOnly",
+    "build": "bun build.ts && dts-bundle-generator --no-check -o dist/index.d.ts src/index.ts",
     "prepublishOnly": "bun run build"
   },
   "dependencies": {
     "typescript": "5"
   },
   "devDependencies": {
-    "eslint": "9.39.1",
     "@eslint/js": "9.39.1",
     "@stylistic/eslint-plugin": "5.6.1",
+    "@types/bun": "latest",
+    "dts-bundle-generator": "9.5.1",
+    "eslint": "9.39.1",
     "globals": "16.5.0",
     "jiti": "2.6.1",
-    "typescript-eslint": "8.48.1",
-    "@types/bun": "latest",
-    "@types/node": "24.3.0"
+    "typescript-eslint": "8.48.1"
   },
   "files": [
     "dist"
