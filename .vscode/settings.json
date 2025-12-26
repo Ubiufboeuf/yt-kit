@@ -5,12 +5,12 @@
     "major",
     "cache",
     "build",
-    "dev:config",
-    "pkg:config",
+    "dev:cfg",
+    "pkg:cfg",
     "types",
     "rename",
-    "public-api",
-    "commit-scope" // este debe ser el último
+    "api",
+    "scope" // este debe ser el último
   ],
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.importModuleSpecifierEnding": "auto",
