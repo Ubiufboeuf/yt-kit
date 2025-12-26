@@ -3,6 +3,7 @@ import { timeToMs } from '../lib/timeUtils'
 import type { CachedData, CacheKey, ValueToCache } from '../types/cacheTypes'
 import { isValidCacheKey } from '../validations/cache'
 import { getFromDisk } from './getFromDisk'
+import { removeFromDisk } from './removeFromDisk'
 import { saveInDisk } from './saveInDisk'
 
 export class CacheManager {
@@ -27,7 +28,8 @@ export class CacheManager {
     if (!item) return null
 
     if (Date.now() - item.timestamp > this.defaultTtl) {
-      this.delete(key)
+      if (cacheMethod !== 'disk') this.delete(key)
+      if (cacheMethod === 'disk') removeFromDisk(key)
       return null
     }
 
