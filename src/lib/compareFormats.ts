@@ -8,6 +8,11 @@ interface CompareParams {
   compareResolution: boolean
 }
 
+interface CompareOptions {
+  type: MediaType,
+  compareResolution: boolean
+}
+
 function compareFormats ({ a, b, compareResolution, type }: CompareParams) {
   const canCompareQuality = (type === 'video') && compareResolution && (a.quality !== null) && (b.quality !== null)
   const canCompareResolution = (type === 'video') && compareResolution && (a.height !== null) && (b.height !== null)
@@ -46,7 +51,7 @@ function compareFormats ({ a, b, compareResolution, type }: CompareParams) {
   return { aScore, bScore }
 }
 
-export function getBetterFormat (a: YtDlpFormat | undefined, b: YtDlpFormat | undefined, { type, compareResolution }: { type: MediaType, compareResolution: boolean }) {
+export function getBetterFormat (a: YtDlpFormat | undefined, b: YtDlpFormat | undefined, { type, compareResolution }: CompareOptions) {
   if (!a || !b) return
 
   const { aScore, bScore } = compareFormats({ a, b, type, compareResolution })
@@ -54,7 +59,7 @@ export function getBetterFormat (a: YtDlpFormat | undefined, b: YtDlpFormat | un
   return aScore > bScore ? a : b
 }
 
-export function getWorstFormat (a: YtDlpFormat | undefined, b: YtDlpFormat | undefined, { type, compareResolution }: { type: MediaType, compareResolution: boolean }) {
+export function getWorstFormat (a: YtDlpFormat | undefined, b: YtDlpFormat | undefined, { type, compareResolution }: CompareOptions) {
   if (!a || !b) return
 
   const { aScore, bScore } = compareFormats({ a, b, type, compareResolution })
