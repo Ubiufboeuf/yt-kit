@@ -13,9 +13,7 @@ export async function getFromDisk (key: CacheKey, json = false): Promise<CachedD
   let content
   try {
     content = await readFile(cachePath, 'utf8')
-  } catch (err) {
-    console.error(`Error leyendo la caché en el almacenamiento para ${key} :`, err)
-  }
+  } catch { /* empty */ }
 
   if (json && content) {
     try {
