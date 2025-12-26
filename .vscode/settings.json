@@ -2,7 +2,7 @@
   "conventionalCommits.scopes": [
     "patch",
     "minor",
-    "mayor",
+    "major",
     "cache",
     "build",
     "dev:config",
