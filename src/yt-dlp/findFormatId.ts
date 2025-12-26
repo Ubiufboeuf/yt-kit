@@ -2,17 +2,15 @@ import type { FormatsToFind } from '../types/videoTypes'
 import type { YtDlpFormat } from '../types/ytDlpFormatTypes'
 import { getBetterFormat, getWorstFormat } from '../lib/compareFormats'
 import { spawnAsync } from '../lib/spawnAsync'
-import { formYoutubeUrl } from '../lib/ytUtils'
 import { cache } from '../cache/CacheManager'
 
 export async function findFormatId (ytId: string, formatToFind: FormatsToFind) {
-  const url = formYoutubeUrl(ytId)
   const formatsCacheKey = `formats-${ytId}`
 
   const isSpecificResolution = Boolean(formatToFind.match(/\d/))
   let foundSpecific = isSpecificResolution ? false : 'N/A'
 
-  const args = ['--print', '%(formats)j', url]
+  const args = ['--print', '%(formats)j', ytId]
   
   const cachedOutput = await cache.get(formatsCacheKey)
   let output: string = cachedOutput?.content ?? ''
