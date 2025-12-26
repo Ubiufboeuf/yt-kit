@@ -8,9 +8,9 @@
     "dev:config",
     "pkg:config",
     "types",
-    "commit-scope",
     "rename",
-    "public-api"
+    "public-api",
+    "commit-scope" // este debe ser el último
   ],
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.importModuleSpecifierEnding": "auto",
