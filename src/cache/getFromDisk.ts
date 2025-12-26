@@ -4,7 +4,7 @@ import { config } from '../config/Configuration'
 import { resolvePath } from '../lib/resolvePath'
 
 // Esta función es solo para caché
-export async function getFromDisk (key: CacheKey, json = false): Promise<CachedData | undefined> {
+export async function getFromDisk (key: CacheKey): Promise<CachedData | undefined> {
   const cacheLocation = config.get('cache')?.cacheLocation
   if (!cacheLocation) return
 
@@ -15,7 +15,7 @@ export async function getFromDisk (key: CacheKey, json = false): Promise<CachedD
     content = await readFile(cachePath, 'utf8')
   } catch { /* empty */ }
 
-  if (json && content) {
+  if (content) {
     try {
       content = JSON.parse(content)
     } catch (err) {
@@ -25,10 +25,5 @@ export async function getFromDisk (key: CacheKey, json = false): Promise<CachedD
 
   if (!content) return
   
-  return {
-    content: json
-      ? content.content
-      : content,
-    timestamp: Date.now()
-  }
+  return content
 }

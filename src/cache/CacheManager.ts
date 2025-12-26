@@ -10,7 +10,7 @@ export class CacheManager {
   private store = new Map<string, CachedData>()
   private defaultTtl = timeToMs(10, 'day')
   
-  async get (key: CacheKey, json = false) {
+  async get (key: CacheKey) {
     if (!isValidCacheKey(key)) {
       throw new Error('CacheKey inválida', { cause: key })
     }
@@ -19,7 +19,7 @@ export class CacheManager {
     let item = null
 
     if (cacheMethod === 'memory') item = this.store.get(key)
-    if (cacheMethod === 'disk') item = await getFromDisk(key, json)
+    if (cacheMethod === 'disk') item = await getFromDisk(key)
     if (cacheMethod === 'hybrid') {
       item = this.store.get(key)
       if (!item) item = await getFromDisk(key)
