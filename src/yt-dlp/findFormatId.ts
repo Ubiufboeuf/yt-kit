@@ -46,7 +46,8 @@ export async function findFormatId (ytId: string, formatToFind: FormatsToFind) {
   }
 
   if (!Array.isArray(formats)) {
-    throw new Error('Se esperaba un array')
+    const msg = 'Se esperaba que los formatos fuesen un array. Puede que el contenido cacheado esté corrupto o sea inválido.'
+    throw new Error(msg)
   }
 
   let bestVideo: YtDlpFormat | undefined = undefined
