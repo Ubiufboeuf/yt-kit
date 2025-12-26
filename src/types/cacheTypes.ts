@@ -1,3 +1,7 @@
+export type CacheKey =
+| 'formats:'
+| (string & {})
+
 export interface CachedData {
   content: string
   timestamp: number
