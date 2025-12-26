@@ -14,7 +14,7 @@ export async function findFormatId (ytId: string, formatToFind: FormatsToFind) {
 
   const args = ['--print', '%(formats)j', url]
   
-  const cachedOutput = cache.get(formatsCacheKey)
+  const cachedOutput = await cache.get(formatsCacheKey)
   let output: string = cachedOutput?.content ?? ''
 
   if (!output) {  
