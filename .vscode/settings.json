@@ -1,16 +1,14 @@
+// las rutas en comentarios parten de src/
 {
   "conventionalCommits.scopes": [
-    "patch",
-    "minor",
-    "major",
-    "cache",
-    "build",
-    "dev:cfg",
-    "pkg:cfg",
-    "types",
-    "rename",
-    "api",
-    "scope" // este debe ser el último
+    "api",        // index.ts
+    "task",       // tasks/
+    "lib",        // lib/
+    "cache",      // cache/
+    "config",     // config/
+    "types",      // types/
+    "validation", // validations/
+    "yt-dlp"      // yt-dlp/, yt-dlp-downloader/
   ],
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.importModuleSpecifierEnding": "auto",
