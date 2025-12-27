@@ -5,14 +5,12 @@ import { spawnAsync } from '../lib/spawnAsync'
 import { cache } from '../cache/CacheManager'
 
 export async function findFormatId (ytId: string, formatToFind: FormatsToFind) {
-  const formatsCacheKey = `formats-${ytId}`
-
   const isSpecificResolution = Boolean(formatToFind.match(/\d/))
   let foundSpecific = isSpecificResolution ? false : 'N/A'
 
   const args = ['--print', '%(formats)j', ytId]
   
-  const cachedOutput = await cache.get(formatsCacheKey)
+  const cachedOutput = await cache.get(`formats:${ytId}`)
   let output: string = cachedOutput?.content ?? ''
 
   if (!output) {  
@@ -30,7 +28,7 @@ export async function findFormatId (ytId: string, formatToFind: FormatsToFind) {
 
     output = processOutput
     
-    cache.set(formatsCacheKey, {
+    cache.set(`formats:${ytId}`, {
       content: output
     })
   }
