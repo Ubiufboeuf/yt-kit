@@ -1,5 +1,5 @@
 export type CacheKey =
-| 'formats:'
+| 'formats:${ytId}'
 | (string & {})
 
 export interface CachedData {
