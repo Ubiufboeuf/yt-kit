@@ -7,7 +7,7 @@ describe('Rutas (Linux)', () => {
     expect(path).toBe('')
   })
   
-  it('\'~\' sin \'/\' al final, debería devolver /home/$USER y NO terminar con \'/\'', () => {
+  it('\'~\' sin \'/\' al final, debería devolver $HOME y NO terminar con \'/\'', () => {
     const home = resolvePath('~')
     expect(home).toMatch(/\/home\/.+[^/]/)
   })
@@ -16,8 +16,25 @@ describe('Rutas (Linux)', () => {
     expect(() => resolvePath('~.')).toThrowError()
   })
 
-  it('.// debe tratarse como ./ y no dar errores', () => {
+  it('.// debe tratarse como ./ y no dar error', () => {
     const path = resolvePath('./..///../mango/././')
     expect(path).toBe('/home/mango')
   })
+
+  it('Usar C: en Linux no debe fallar', () => {
+    expect(() => resolvePath('~/.cache/C:/Users/Admin/Desktop')).not.toThrowError()
+  })
+
+  it('Ruta con espacios debe fallar', () => {
+    expect(() => resolvePath('./formats/../ formats/./. /id-456')).toThrowError()
+  })
+
+  it('Solo . debe fallar por no tener \'/\'', () => {
+    expect(() => resolvePath('.')).toThrowError()
+  })
+
+  it('Solo .. debe fallar por no tener /', () => {
+    expect(() => resolvePath('..')).toThrowError()
+  })
 })
+
