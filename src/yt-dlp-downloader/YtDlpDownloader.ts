@@ -3,8 +3,8 @@ import { spawnAsync } from '../lib/spawnAsync'
 import { resolveFilenamePattern } from '../lib/resolveFilenamePattern'
 
 export class YtDlpDownloader implements Downloader {
-  async download (url: string, ytId: string, options: DownloadTasksOptions): Promise<DownloadResult> {
-    const args = this.buildYtDlpArgs(url, ytId, options)
+  async download (ytId: string, options: DownloadTasksOptions): Promise<DownloadResult> {
+    const args = this.buildYtDlpArgs(ytId, options)
 
     // const result = await spawnAsync('yt-dlp', args, true)
     await spawnAsync('yt-dlp', args, true)
@@ -15,7 +15,7 @@ export class YtDlpDownloader implements Downloader {
     }
   }
 
-  private buildYtDlpArgs (url: string, ytId: string, options: DownloadTasksOptions) {
+  private buildYtDlpArgs (ytId: string, options: DownloadTasksOptions) {
     const { id, type } = options
     const isVideo = type === 'video'
     
@@ -31,7 +31,7 @@ export class YtDlpDownloader implements Downloader {
       ...audioFormatPreferences,
       '-o', exportName,
       '-P', exportRoute,
-      url
+      ytId
     ]
 
     return args
