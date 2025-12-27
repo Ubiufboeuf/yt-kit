@@ -1,14 +1,11 @@
 import { rm } from 'node:fs/promises'
-import { config } from '../config/Configuration'
-import { resolvePath } from '../lib/resolvePath'
 import type { CacheKey } from '../types/cacheTypes'
+import { getKeyPath } from '../lib/getKeyPath'
 
 // Esta función es solo para caché
 export async function removeFromDisk (key: CacheKey) {
-  const cacheLocation = config.get('cache')?.cacheLocation
-  if (!cacheLocation) return
-
-  const cachePath = resolvePath(cacheLocation)
+  const cachePath = getKeyPath(key)
+  if (!cachePath) return
 
   try {
     await rm(cachePath)
