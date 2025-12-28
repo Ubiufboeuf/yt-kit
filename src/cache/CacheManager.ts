@@ -1,5 +1,4 @@
 import { config } from '../config/Configuration'
-import { timeToMs } from '../lib/timeUtils'
 import type { CachedData, CacheKey, ValueToCache } from '../types/cacheTypes'
 import { isValidCacheKey } from '../validations/cache'
 import { getFromDisk } from './getFromDisk'
@@ -8,7 +7,7 @@ import { saveInDisk } from './saveInDisk'
 
 export class CacheManager {
   private store = new Map<string, CachedData>()
-  private defaultTtl = timeToMs(10, 'day')
+  private ttl = config.get('cache')?.ttlInMs ?? 0
   
   async get (key: CacheKey) {
     if (!isValidCacheKey(key)) {
@@ -27,7 +26,7 @@ export class CacheManager {
 
     if (!item) return null
 
-    if (Date.now() - item.timestamp > this.defaultTtl) {
+    if (Date.now() - item.timestamp > this.ttl) {
       if (cacheMethod !== 'disk') this.delete(key)
       if (cacheMethod === 'disk') removeFromDisk(key)
       return null
