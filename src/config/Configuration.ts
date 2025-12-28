@@ -11,6 +11,11 @@ export class Configuration {
   }
 
   set<K extends ConfigKey> (key: K, value: ConfigValue<K>) {
+    const prevConfig = this.store.get(key) ?? {}
+    this.store.set(key, { ...prevConfig, ...value })
+  }
+
+  replace<K extends ConfigKey> (key: K, value: ConfigValue<K>) {
     this.store.set(key, value)
   }
 
