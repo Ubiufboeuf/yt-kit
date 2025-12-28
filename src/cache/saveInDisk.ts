@@ -12,8 +12,13 @@ const cachePath = getKeyPath(key)
 
   try {
     mkdir(cacheDir, { recursive: true })
+  } catch {
+    console.error(`Error creando la carpeta para guardar ${key}`)
+  }
+
+  try {
     await writeFile(cachePath, JSON.stringify(value), 'utf8')
-  } catch (err) {
-    console.error(`Error cacheando ${key} en el almacenamiento:`, err)
+  } catch {
+    console.error(`Error cacheando ${key} en el almacenamiento`)
   }
 }
