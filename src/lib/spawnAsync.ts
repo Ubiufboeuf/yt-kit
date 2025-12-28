@@ -1,10 +1,15 @@
 import { spawn } from 'node:child_process'
 import type { CommandKey } from '../types/childProcessTypes'
-import { COMMANDS } from '../lib/constants'
 import { streamLog } from './logger'
+import { config } from '../config/Configuration'
 
 export function spawnAsync (command: CommandKey, args: string[], showOutput?: boolean) {
-  const _command = COMMANDS[command]
+  const configuredCommands = config.get('commands')
+  const _command = configuredCommands?.[command]
+  
+  if (!_command) {
+    throw new Error(`No se encontró un comando configurado para ${command}`)
+  }
 
   return new Promise((resolve, reject) => {
     const spawnProcess = spawn(_command, args)
