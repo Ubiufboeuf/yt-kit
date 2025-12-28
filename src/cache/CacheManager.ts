@@ -55,7 +55,7 @@ export class CacheManager {
     }
   }
 
-  delete (key: string) {
+  delete (key: CacheKey) {
     this.store.delete(key)
   }
 }
