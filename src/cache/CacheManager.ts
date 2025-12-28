@@ -55,7 +55,16 @@ export class CacheManager {
   }
 
   async delete (key: CacheKey) {
-    const cacheMethod = config.get('cache')?.method
+    const cacheConfig = config.get('cache')
+    const cacheMethod = cacheConfig?.method
+    const ignoreTTL = cacheConfig?.ignoreTTL
+
+    if (ignoreTTL === 'always') return
+    if (ignoreTTL === 'next') {
+      config.set('cache', { ignoreTTL: undefined })
+      return
+    }
+    
     if (cacheMethod === 'memory') this.store.delete(key)
     if (cacheMethod === 'disk') await removeFromDisk(key)
     if (cacheMethod === 'hybrid') {
