@@ -1,4 +1,5 @@
 import { config } from '../config/Configuration'
+import { timeToMs } from '../lib/timeUtils'
 import type { CachedData, CacheKey, ValueToCache } from '../types/cacheTypes'
 import { isValidCacheKey } from '../validations/cache'
 import { getFromDisk } from './getFromDisk'
@@ -7,7 +8,7 @@ import { saveInDisk } from './saveInDisk'
 
 export class CacheManager {
   private store = new Map<string, CachedData>()
-  private ttl = config.get('cache')?.ttlInMs ?? 0
+  private ttl = config.get('cache')?.ttlInMs ?? timeToMs(10, 'day')
   
   async get (key: CacheKey) {
     if (!isValidCacheKey(key)) {
