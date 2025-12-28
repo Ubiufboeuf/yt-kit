@@ -83,7 +83,6 @@ export async function findFormatId (ytId: string, formatToFind: FormatsToFind) {
   
   return {
     foundSpecific,
-    formatId: desiredFormat?.format_id,
-    desiredFormat
+    formatId: desiredFormat?.format_id
   }
 }
