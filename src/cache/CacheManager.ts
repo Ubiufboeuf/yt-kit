@@ -28,8 +28,7 @@ export class CacheManager {
     if (!item) return null
 
     if (Date.now() - item.timestamp > this.ttl) {
-      if (cacheMethod !== 'disk') this.delete(key)
-      if (cacheMethod === 'disk') removeFromDisk(key)
+      await this.delete(key)
       return null
     }
 
@@ -55,8 +54,14 @@ export class CacheManager {
     }
   }
 
-  delete (key: CacheKey) {
-    this.store.delete(key)
+  async delete (key: CacheKey) {
+    const cacheMethod = config.get('cache')?.method
+    if (cacheMethod === 'memory') this.store.delete(key)
+    if (cacheMethod === 'disk') await removeFromDisk(key)
+    if (cacheMethod === 'hybrid') {
+      this.store.delete(key)
+      await removeFromDisk(key)
+    }
   }
 }
 
