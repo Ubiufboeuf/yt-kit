@@ -7,7 +7,7 @@ import { removeFromDisk } from './removeFromDisk'
 import { saveInDisk } from './saveInDisk'
 
 export class CacheManager {
-  private store = new Map<string, CachedData>()
+  private store = new Map<CacheKey, CachedData>()
   private ttl = config.get('cache')?.ttlInMs ?? timeToMs(10, 'day')
   
   async get (key: CacheKey) {
