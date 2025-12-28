@@ -18,6 +18,10 @@ export function getKeyPath (key: CacheKey): string | undefined {
     if (!ytId) {
       throw new Error(`Falta especificar ytId en ${key}`)
     }
+    // Este se maneja porque puede ser común usarlo por error (por ts)
+    if (ytId === '${ytId}') {
+      throw new Error('${ytId} no es un ID válido. Eso debes evaluarlo como `${ytId}`')
+    }
     
     path = join(resolvePath(cacheLocation), 'formats', ytId)
   }
