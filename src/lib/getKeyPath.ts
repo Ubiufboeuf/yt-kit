@@ -5,7 +5,10 @@ import { join } from 'node:path'
 
 export function getKeyPath (key: CacheKey): string | undefined {
   const cacheLocation = config.get('cache')?.cacheLocation
-  if (!cacheLocation) return
+
+  if (!cacheLocation) {
+    throw new Error('Es necesario configurar cacheLocation para buscar en el almacenamiento.')
+  }
 
   let path = resolvePath(cacheLocation)
 
