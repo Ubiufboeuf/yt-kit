@@ -6,7 +6,7 @@ import { YtDlpDownloader } from '../../yt-dlp-downloader/YtDlpDownloader'
 import type { DownloadType } from '../../types/downloaderTaskTypes'
 
 export async function downloadVideo (ytId: string, options: DownloadOptions) {
-  if (!ytId || !options.id) return
+  if (!ytId || !options.formatId) return
 
   const taskOptions = formDownloadTaskOptions('video', options)
 
@@ -14,7 +14,7 @@ export async function downloadVideo (ytId: string, options: DownloadOptions) {
 }
 
 export async function downloadAudio (ytId: string, options: DownloadOptions) {
-  if (!ytId || !options.id) return
+  if (!ytId || !options.formatId) return
 
   const taskOptions = formDownloadTaskOptions('audio', options)
 
@@ -23,7 +23,7 @@ export async function downloadAudio (ytId: string, options: DownloadOptions) {
 
 function formDownloadTaskOptions (type: DownloadType, options: DownloadOptions): DownloadTasksOptions {
   const taskOptions: DownloadTasksOptions = {
-    id: `${options.id}`,
+    id: `${options.formatId}`,
     type,
     outputDir: options.outputDir ?? '.',
     filename: options.filename ?? DEFAULT_FILENAME

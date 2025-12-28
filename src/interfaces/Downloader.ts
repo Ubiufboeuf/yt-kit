@@ -3,7 +3,7 @@ export interface Downloader {
 }
 
 export interface DownloadOptions {
-  id: string | number
+  formatId: string | number
   outputDir?: string
   filename?: string
 }
