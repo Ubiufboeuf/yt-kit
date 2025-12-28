@@ -12,8 +12,9 @@ export interface ValueToCache {
 }
 
 export interface CacheConfig {
-  method: CacheMethod
+  method?: CacheMethod
   cacheLocation?: string
+  ttlInMs?: number
 }
 
 export type CacheMethod = 'memory' | 'disk' | 'hybrid'
