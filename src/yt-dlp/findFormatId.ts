@@ -1,50 +1,13 @@
 import type { FormatsToFind } from '../types/videoTypes'
 import type { YtDlpFormat } from '../types/ytDlpFormatTypes'
 import { getBetterFormat, getWorstFormat } from '../lib/compareFormats'
-import { spawnAsync } from '../lib/spawnAsync'
-import { cache } from '../cache/CacheManager'
+import { getAllFormats } from './getAllFormats'
 
 export async function findFormatId (ytId: string, formatToFind: FormatsToFind) {
   const isSpecificResolution = Boolean(formatToFind.match(/\d/))
   let foundSpecific = isSpecificResolution ? false : 'N/A'
 
-  const args = ['--print', '%(formats)j', ytId]
-  
-  const cachedOutput = await cache.get(`formats:${ytId}`)
-  let output: string = cachedOutput?.content ?? ''
-
-  if (!output) {  
-    let processOutput: unknown
-    try {
-      processOutput = await spawnAsync('yt-dlp', args)
-    } catch (err) {
-      console.error('Error consiguiendo el ID del formato')
-      throw err
-    }
-
-    if (typeof processOutput !== 'string') {
-      throw new Error('La salida del proceso es de tipo inválido (se esperaba string)')
-    }
-
-    output = processOutput
-    
-    cache.set(`formats:${ytId}`, {
-      content: output
-    })
-  }
-
-  let formats: YtDlpFormat[] = []
-  try {
-    formats = JSON.parse(output) as YtDlpFormat[]
-  } catch (err) {
-    console.error('Error convirtiendo la salida de yt-dlp a JSON')
-    throw err
-  }
-
-  if (!Array.isArray(formats)) {
-    const msg = 'Se esperaba que los formatos fuesen un array. Puede que el contenido cacheado esté corrupto o sea inválido.'
-    throw new Error(msg)
-  }
+  const formats = await getAllFormats(ytId)
 
   let bestVideo: YtDlpFormat | undefined = undefined
   let worstVideo: YtDlpFormat | undefined = undefined
