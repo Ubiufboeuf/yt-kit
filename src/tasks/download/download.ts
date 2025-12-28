@@ -25,7 +25,7 @@ function formDownloadTaskOptions (type: DownloadType, options: DownloadOptions):
   const taskOptions: DownloadTasksOptions = {
     id: options.id,
     type,
-    outputPath: options.outputPath ?? '.',
+    outputDir: options.outputDir ?? '.',
     filename: options.filename ?? DEFAULT_FILENAME
   }
 

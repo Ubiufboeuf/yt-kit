@@ -19,7 +19,7 @@ export class YtDlpDownloader implements Downloader {
     const { id, type } = options
     const isVideo = type === 'video'
     
-    const exportRoute = options.outputPath
+    const exportRoute = options.outputDir
     const exportName = resolveFilenamePattern({ filename: options.filename, id: options.id, ytId })
     const audioFormat = 'aac'
     const audioFormatPreferences = isVideo

@@ -4,14 +4,14 @@ export interface Downloader {
 
 export interface DownloadOptions {
   id: string
-  outputPath?: string
+  outputDir?: string
   filename?: string
 }
 
 export interface DownloadTasksOptions {
   id: string
   type: 'video' | 'audio'
-  outputPath: string
+  outputDir: string
   filename: string
 }
 
