@@ -1,8 +1,9 @@
 import type { ConfigKey, ConfigValue } from '../types/configTypes'
+import { defaultConfig } from './DefaultConfiguration'
 
 export class Configuration {
-  private store = new Map<ConfigKey, unknown>()
-  
+  private store = new Map<ConfigKey, unknown>(defaultConfig)
+
   get<K extends ConfigKey> (key: K) {
     const item = this.store.get(key)
     if (!item) return null
