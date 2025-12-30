@@ -9,6 +9,7 @@ export { cache } from './cache/CacheManager'
 // Funcionalidades del programa
 export { downloadAudio, downloadVideo } from './tasks/download/download'
 export { findFormatId } from './yt-dlp/findFormatId'
+export { getAllFormats } from './yt-dlp/getAllFormats'
 export { getFromDisk } from './cache/getFromDisk'
 export { saveInDisk } from './cache/saveInDisk'
 
