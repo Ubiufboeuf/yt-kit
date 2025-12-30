@@ -1,3 +1,2 @@
-import type { COMMANDS } from '../lib/constants'
-
-export type Commands = Record<keyof typeof COMMANDS, string>
+export type ListOfCommands = 'yt-dlp'
+export type Commands = Record<ListOfCommands, string>
