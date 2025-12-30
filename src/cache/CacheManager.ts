@@ -57,11 +57,11 @@ export class CacheManager {
   async delete (key: CacheKey) {
     const cacheConfig = config.get('cache')
     const cacheMethod = cacheConfig?.method
-    const ignoreTTL = cacheConfig?.ignoreTTL
+    const ignoreTTL = cacheConfig?.ignoreTTL ?? 'never'
 
     if (ignoreTTL === 'always') return
     if (ignoreTTL === 'next') {
-      config.add('cache', { ignoreTTL: undefined })
+      config.add('cache', { ignoreTTL: 'never' })
       return
     }
     
