@@ -14,7 +14,6 @@ export { getFromDisk } from './cache/getFromDisk'
 export { saveInDisk } from './cache/saveInDisk'
 
 // Helpers y utilidades
-export { formYoutubeUrl } from './lib/ytUtils' // Se mantiene para no crear un breaking change todavía
 export { getBetterFormat, getWorstFormat } from './lib/compareFormats'
 export { resolveFilenamePattern } from './lib/resolveFilenamePattern'
 export { expandPattern } from './lib/expandPattern'
