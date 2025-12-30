@@ -61,7 +61,7 @@ export class CacheManager {
 
     if (ignoreTTL === 'always') return
     if (ignoreTTL === 'next') {
-      config.set('cache', { ignoreTTL: undefined })
+      config.add('cache', { ignoreTTL: undefined })
       return
     }
     

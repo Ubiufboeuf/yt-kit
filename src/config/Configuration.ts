@@ -11,7 +11,7 @@ export class Configuration {
     return item as ConfigValue<K>
   }
 
-  set<K extends ConfigKey> (key: K, value: ConfigValue<K>) {
+  add<K extends ConfigKey> (key: K, value: ConfigValue<K>) {
     const prevConfig = this.store.get(key) ?? {}
     this.store.set(key, { ...prevConfig, ...value })
   }
