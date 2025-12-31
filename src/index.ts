@@ -18,6 +18,7 @@ export { getBetterFormat, getWorstFormat } from './lib/compareFormats'
 export { resolveFilenamePattern } from './lib/resolveFilenamePattern'
 export { expandPattern } from './lib/expandPattern'
 export { resolvePath } from './lib/resolvePath'
+export { msToTime, timeToMs } from './lib/timeUtils'
 
 // Tipos
 export type * from './types/videoTypes'
