@@ -24,6 +24,7 @@ export type * from './types/videoTypes'
 export type * from './types/configTypes'
 export type * from './types/cacheTypes'
 export type * from './types/commandsTypes'
+export type * from './types/ytDlpFormatTypes'
 export type { Pattern, PatternData } from './lib/expandPattern'
 
 // Constantes públicas (seguras de exportar)
