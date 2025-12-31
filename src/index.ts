@@ -21,7 +21,6 @@ export { resolvePath } from './lib/resolvePath'
 
 // Tipos
 export type * from './types/videoTypes'
-export type * from './types/childProcessTypes'
 export type * from './types/configTypes'
 export type * from './types/cacheTypes'
 export type * from './types/commandsTypes'
