@@ -27,6 +27,14 @@ export class CacheManager {
 
     if (!item) return null
 
+    const ignoreTTL = config.get('cache')?.ignoreTTL ?? 'never'
+
+    if (ignoreTTL === 'always') return
+    if (ignoreTTL === 'next') {
+      config.add('cache', { ignoreTTL: 'never' })
+      return
+    }
+
     if (Date.now() - item.timestamp > this.ttl) {
       await this.delete(key)
       return null
@@ -55,15 +63,7 @@ export class CacheManager {
   }
 
   async delete (key: CacheKey) {
-    const cacheConfig = config.get('cache')
-    const cacheMethod = cacheConfig?.method
-    const ignoreTTL = cacheConfig?.ignoreTTL ?? 'never'
-
-    if (ignoreTTL === 'always') return
-    if (ignoreTTL === 'next') {
-      config.add('cache', { ignoreTTL: 'never' })
-      return
-    }
+    const cacheMethod = config.get('cache')?.method
     
     if (cacheMethod === 'memory') this.store.delete(key)
     if (cacheMethod === 'disk') await removeFromDisk(key)
