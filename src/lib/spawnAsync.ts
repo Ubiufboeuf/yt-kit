@@ -1,7 +1,7 @@
 import { spawn } from 'node:child_process'
-import type { CommandKey } from '../types/childProcessTypes'
 import { streamLog } from './logger'
 import { config } from '../config/Configuration'
+import type { CommandKey } from '../types/commandsTypes'
 
 export function spawnAsync (command: CommandKey, args: string[], showOutput?: boolean) {
   const configuredCommands = config.get('commands')

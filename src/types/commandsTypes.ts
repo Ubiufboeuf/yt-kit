@@ -1,2 +1,2 @@
-export type ListOfCommands = 'yt-dlp'
-export type Commands = Record<ListOfCommands, string>
+export type CommandKey = 'yt-dlp'
+export type Commands = Record<CommandKey, string>
