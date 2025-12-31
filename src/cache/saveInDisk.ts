@@ -19,6 +19,6 @@ const cachePath = getKeyPath(key)
   try {
     await writeFile(cachePath, JSON.stringify(value), 'utf8')
   } catch {
-    console.error(`Error cacheando ${key} en el almacenamiento`)
+    console.error(`Error cacheando "${key}" en el almacenamiento`)
   }
 }
