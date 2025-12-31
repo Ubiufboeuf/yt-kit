@@ -8,7 +8,8 @@
     "config",     // config/
     "types",      // types/
     "validation", // validations/
-    "yt-dlp"      // yt-dlp/, yt-dlp-downloader/
+    "yt-dlp",     // yt-dlp/, yt-dlp-downloader/,
+    "logs",       // cualquier log
   ],
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.importModuleSpecifierEnding": "auto",
