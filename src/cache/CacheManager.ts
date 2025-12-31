@@ -29,10 +29,10 @@ export class CacheManager {
 
     const ignoreTTL = config.get('cache')?.ignoreTTL ?? 'never'
 
-    if (ignoreTTL === 'always') return
+    if (ignoreTTL === 'always') return item
     if (ignoreTTL === 'next') {
       config.add('cache', { ignoreTTL: 'never' })
-      return
+      return item
     }
 
     if (Date.now() - item.timestamp > this.ttl) {
