@@ -21,6 +21,7 @@
   "homepage": "https://github.com/ubiufboeuf/yt-kit#readme",
   "scripts": {
     "start": "bun pruebas.ts",
+    "dev": "bun --watch pruebas.ts",
     "build": "bun build.ts && dts-bundle-generator --no-check -o dist/index.d.ts src/index.ts",
     "build:debug": "tsc -p tsconfig.build.json",
     "prepublishOnly": "bun run build"
