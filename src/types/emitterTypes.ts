@@ -1,4 +1,5 @@
 export interface EventMap {
+  'test-event': (param: string) => void
   event: (e: string) => void
 }
 
