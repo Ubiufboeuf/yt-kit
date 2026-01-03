@@ -1,10 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { EventHandler, EventName, EventArgs } from '../types/emitterTypes'
 
-export class Emitter {
-  private events = new Map<EventName, Set<(...args: any[]) => void>>()
+/* Se supone que con el TypeScript actual
+no hay manera de hacer los tipos lo más específicos para los eventos
+(al menos no sin empeorar varias cosas que no salen a cuenta),
+así que una buena solución actual es esto */
 
-  emit<T extends EventName> (event: T, eventArg: EventArgs<T>) {
+type EventMap = object
+type Handler = (arg: unknown) => void
+
+export class Emitter<EventList extends EventMap> {
+  private events = new Map<keyof EventList, Set<Handler>>()
+
+  emit<Event extends keyof EventList> (event: Event, eventArg: EventList[Event]) {
     const handlers = this.events.get(event)
     if (!handlers) return
 
@@ -13,26 +20,18 @@ export class Emitter {
     }
   }
 
-  on<T extends EventName> (event: T, handler: EventHandler<T>) {
-    if (!handler) {
-      throw new Error('Falta especificar un manejador para el evento')
-    }
-
+  on<Event extends keyof EventList> (event: Event, handler: (event: EventList[Event]) => void) {
     let handlers = this.events.get(event)
 
-    if (!handlers) handlers = new Set<(...args: any[]) => void>()
-    if (handlers.has(handler)) return
-
-    handlers.add(handler)
-
-    this.events.set(event, handlers)
-  }
-
-  once<T extends EventName> (event: T, handler: EventHandler<T>) {
-    if (!handler) {
-      throw new Error('Falta especificar un manejador para el evento')
+    if (!handlers) {
+      handlers = new Set()
+      this.events.set(event, handlers)
     }
 
+    handlers.add(handler as Handler)
+  }
+
+  once<Event extends keyof EventList> (event: Event, handler: (event: EventList[Event]) => void) {
     const wrapper = (params: any) => {
       this.off(event, wrapper)
       handler(params)
@@ -41,18 +40,14 @@ export class Emitter {
     this.on(event, wrapper)
   }
 
-  off<T extends EventName> (event: T, handler: EventHandler<T>) {
-    if (!handler) {
-      throw new Error('Falta especificar el manejador para desvincular del evento')
-    }
-
+  off<Event extends keyof EventList> (event: Event, handler: (event: EventList[Event]) => void) {
     let handlers = this.events.get(event)
     
-    if (!handlers) handlers = new Set<(...args: any[]) => void>()
-    if (!handlers.has(handler)) return
+    if (!handlers) {
+      handlers = new Set<Handler>()
+      this.events.set(event, handlers)
+    }
 
-    handlers.delete(handler)
-
-    this.events.set(event, handlers)
+    handlers.delete(handler as Handler)
   }
 }
