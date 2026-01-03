@@ -15,7 +15,7 @@ const multipliers: Record<TimeUnit, number> = {
  * Si `unit` no es válido, devuelve `amount`.
  * 
  * ```js
- * convertTime(10, 'day') // 864000000ms
+ * convertTime(7, 'second') // 7000ms
  * convertTime(4, 'lemon') // 4ms
  * ```
  * 
