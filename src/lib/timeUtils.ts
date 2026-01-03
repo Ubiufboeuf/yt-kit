@@ -1,5 +1,4 @@
 type TimeUnit = 'day' | 'hour' | 'minute' | 'second' | 'nano'
-type Miliseconds = number
 
 const multipliers: Record<TimeUnit, number> = {
   'day': 1000 * 3600 * 24,
@@ -21,7 +20,7 @@ const multipliers: Record<TimeUnit, number> = {
  * 
  * @returns Devuelve en milisegundos la cantidad (`amount`) de unidad (`unit`) especificada
  */
-export function timeToMs (amount: number, unit: TimeUnit): Miliseconds {
+export function timeToMs (amount: number, unit: TimeUnit): number {
   if (!multipliers[unit]) return amount
   const ms = amount * multipliers[unit]
   return ms
