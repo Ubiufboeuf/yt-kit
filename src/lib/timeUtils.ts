@@ -1,11 +1,11 @@
-type TimeUnit = 'day' | 'hrs' | 'min' | 'sec' | 'nano'
+type TimeUnit = 'day' | 'hour' | 'minute' | 'second' | 'nano'
 type Miliseconds = number
 
 const multipliers: Record<TimeUnit, number> = {
   'day': 1000 * 3600 * 24,
-  'hrs': 1000 * 3600,
-  'min': 1000 * 60,
-  'sec': 1000,
+  'hour': 1000 * 3600,
+  'minute': 1000 * 60,
+  'second': 1000,
   'nano': 0.001
 }
 
