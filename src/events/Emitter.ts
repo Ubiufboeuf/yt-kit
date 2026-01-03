@@ -33,8 +33,9 @@ export class Emitter {
       throw new Error('Falta especificar un manejador para el evento')
     }
 
-    const wrapper = () => {
-      this.off(event, handler)
+    const wrapper = (params: any) => {
+      this.off(event, wrapper)
+      handler(params)
     }
 
     this.on(event, wrapper)
