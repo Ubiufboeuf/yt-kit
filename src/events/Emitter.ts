@@ -8,7 +8,7 @@ export class Emitter {
     const handlers = this.events.get(event)
     if (!handlers) return
 
-    for (const handler of handlers) {
+    for (const handler of [...handlers]) {
       handler(eventArg)
     }
   }
