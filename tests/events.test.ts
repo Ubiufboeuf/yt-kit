@@ -1,18 +1,18 @@
 import { describe, expect, it } from 'bun:test'
 import { Emitter } from '../src/events/Emitter'
-import type { EventArgs } from '../src/types/emitterTypes'
+import type { AppEvents, EmitterArgs } from '../src/types/emitterTypes'
 import { beforeEach } from 'node:test'
 
 describe('Events (Emitter)', () => {
   const testParam = 'Ŧ€$ŧ'
-  const cb = (param: EventArgs<'test-event'>) => paramFromEvent = param
+  const cb = (param: EmitterArgs<'test-event'>) => paramFromEvent = param
 
-  let emitter = new Emitter()
+  let emitter = new Emitter<AppEvents>()
   let paramFromEvent = ''
 
   beforeEach(() => {
     paramFromEvent = ''
-    emitter = new Emitter()
+    emitter = new Emitter<AppEvents>()
   })
   
   it('funcionamiento de on() y emit()', () => {
@@ -52,7 +52,7 @@ describe('Events (Emitter)', () => {
 
   it('anidar on() y once() varias veces', () => {
     let result = ''
-    const smallCallback = (param: EventArgs<'test-event'>) => result += param
+    const smallCallback = (param: EmitterArgs<'test-event'>) => result += param
     const midCallback = () => emitter.on('test-event', smallCallback)
     const bigCallback = () => emitter.once('test-event', midCallback)
 
