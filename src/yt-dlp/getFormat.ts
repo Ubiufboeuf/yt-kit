@@ -2,7 +2,9 @@ import { cache } from '../cache/CacheManager'
 import type { YtDlpFormat } from '../types/ytDlpFormatTypes'
 import { findFormatId } from './findFormatId'
 
-export async function getFormat (ytId: string, formatId: string) {
+export async function getFormat (ytId: string, formatId: string | number | undefined) {
+  if (!formatId) return
+  
   const cachedFormats = await cache.get(`formats:${ytId}`)
   let formatsStr = cachedFormats?.content
 
