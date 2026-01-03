@@ -4,12 +4,12 @@ import type { EventHandler, EventName, EventArgs } from '../types/emitterTypes'
 export class Emitter {
   private events = new Map<EventName, Set<(...args: any[]) => void>>()
 
-  emit<T extends EventName> (event: T, ...args: EventArgs<T>) {
+  emit<T extends EventName> (event: T, eventArg: EventArgs<T>) {
     const handlers = this.events.get(event)
     if (!handlers) return
 
     for (const handler of handlers) {
-      handler(...args)
+      handler(eventArg)
     }
   }
 
