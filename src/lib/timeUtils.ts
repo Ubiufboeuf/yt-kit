@@ -1,11 +1,11 @@
-type TimeUnit = 'day' | 'hrs' | 'min' | 'sec' | 'nano'
+type TimeUnit = 'day' | 'hour' | 'minute' | 'second' | 'nano'
 type Miliseconds = number
 
 const multipliers: Record<TimeUnit, number> = {
   'day': 1000 * 3600 * 24,
-  'hrs': 1000 * 3600,
-  'min': 1000 * 60,
-  'sec': 1000,
+  'hour': 1000 * 3600,
+  'minute': 1000 * 60,
+  'second': 1000,
   'nano': 0.001
 }
 
@@ -15,7 +15,7 @@ const multipliers: Record<TimeUnit, number> = {
  * Si `unit` no es válido, devuelve `amount`.
  * 
  * ```js
- * convertTime(10, 'day') // 864000000ms
+ * convertTime(7, 'second') // 7000ms
  * convertTime(4, 'lemon') // 4ms
  * ```
  * 
