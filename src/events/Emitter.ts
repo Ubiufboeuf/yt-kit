@@ -28,7 +28,7 @@ export class Emitter {
     this.events.set(event, handlers)
   }
 
-  once<T extends EventName> (event: T, handler: (options: EventHandler<T>) => void) {
+  once<T extends EventName> (event: T, handler: EventHandler<T>) {
     if (!handler) {
       throw new Error('Falta especificar un manejador para el evento')
     }
@@ -40,7 +40,7 @@ export class Emitter {
     this.on(event, wrapper)
   }
 
-  off<T extends EventName> (event: T, handler: (options: EventHandler<T>) => void) {
+  off<T extends EventName> (event: T, handler: EventHandler<T>) {
     if (!handler) {
       throw new Error('Falta especificar el manejador para desvincular del evento')
     }
