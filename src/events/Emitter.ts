@@ -50,4 +50,12 @@ export class Emitter<EventList extends EventMap> {
 
     handlers.delete(handler as Handler)
   }
+
+  clear<Event extends keyof EventList> (event: Event) {
+    this.events.delete(event)
+  }
+
+  resetEmitter () {
+    this.events = new Map()
+  }
 }
