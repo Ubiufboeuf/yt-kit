@@ -1,10 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-/* Se supone que con el TypeScript actual
-no hay manera de hacer los tipos lo más específicos para los eventos
-(al menos no sin empeorar varias cosas que no salen a cuenta),
-así que una buena solución actual es esto */
-
 type EventMap = object
 type Listener = (arg: unknown) => void
 type DefaultEventList = Record<string | number | symbol, any>
