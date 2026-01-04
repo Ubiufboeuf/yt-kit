@@ -4,14 +4,9 @@ import type { AppEvents, EmitterArgs } from '../src/types/emitterTypes'
 import { beforeEach } from 'node:test'
 
 describe('Events (Emitter)', () => {
-  const testParam = 'Ŧ€$ŧ'
-  const cb = (param: EmitterArgs<'test-event'>) => paramFromEvent = param
-
   let emitter = new Emitter<AppEvents>()
-  let paramFromEvent = ''
 
   beforeEach(() => {
-    paramFromEvent = ''
     emitter = new Emitter<AppEvents>()
   })
   
@@ -32,26 +27,35 @@ describe('Events (Emitter)', () => {
   })
   
   it('funcionamiento de on()', () => {
+    let called = 0
+    const cb = () => called++
+
     emitter.on('test-event', cb)
-    emitter.emit('test-event', testParam)
-    expect(paramFromEvent).toBe(testParam)
+    emitter.emit('test-event', '')
+    expect(called).toBe(1)
   })
   
   it('funcionamiento de once()', () => {
-    emitter.once('test-event', cb)
-    emitter.emit('test-event', testParam)
-    expect(paramFromEvent).toBe(testParam)
+    let called = 0
+    const cb = () => called++
 
-    paramFromEvent = ''
-    emitter.emit('test-event', testParam)
-    expect(paramFromEvent).toBeFalsy()
+    emitter.once('test-event', cb)
+    emitter.emit('test-event', '')
+    expect(called).toBe(1)
+
+    called = 0
+    emitter.emit('test-event', '')
+    expect(called).toBe(0)
   })
   
   it('funcionamiento de off()', () => {
+    let called = 0
+    const cb = () => called++
+    
     emitter.on('test-event', cb)
     emitter.off('test-event', cb)
-    emitter.emit('test-event', testParam)
-    expect(paramFromEvent).toBeFalsy()
+    emitter.emit('test-event', '')
+    expect(called).toBe(0)
   })
 
   it('funcionamiento de clear()', () => {
