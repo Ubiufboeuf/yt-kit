@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'bun:test'
+import { describe, expect, it, mock } from 'bun:test'
 import { Emitter } from '../src/events/Emitter'
 import type { AppEvents, EmitterArgs } from '../src/types/emitterTypes'
 import { beforeEach } from 'node:test'
@@ -52,6 +52,34 @@ describe('Events (Emitter)', () => {
     emitter.off('test-event', cb)
     emitter.emit('test-event', testParam)
     expect(paramFromEvent).toBeFalsy()
+  })
+
+  it('funcionamiento de clear()', () => {
+    let called = 0
+    emitter.on('test-event', () => called++)
+    emitter.on('test-event', () => called++)
+    emitter.on('event', () => called++)
+
+    emitter.clear('test-event')
+    
+    emitter.emit('test-event', '')
+    emitter.emit('event', 0)
+
+    expect(called).toBe(1)
+  })
+
+  it('funcionamiento de resetEmitter()', () => {
+    let called = 0
+    emitter.on('test-event', () => called++)
+    emitter.on('test-event', () => called++)
+    emitter.on('event', () => called++)
+    
+    emitter.resetEmitter()
+    
+    emitter.emit('test-event', '')
+    emitter.emit('event', 0)
+
+    expect(called).toBe(0)
   })
 
   it('mismo handler varias veces sobre sobre un mismo evento', () => {
