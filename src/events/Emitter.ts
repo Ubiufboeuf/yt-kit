@@ -6,49 +6,49 @@ no hay manera de hacer los tipos lo más específicos para los eventos
 así que una buena solución actual es esto */
 
 type EventMap = object
-type Handler = (arg: unknown) => void
+type Listener = (arg: unknown) => void
 
 export class Emitter<EventList extends EventMap> {
-  #events = new Map<keyof EventList, Set<Handler>>()
+  #events = new Map<keyof EventList, Set<Listener>>()
 
   emit<Event extends keyof EventList> (event: Event, eventArg: EventList[Event]) {
-    const handlers = this.#events.get(event)
-    if (!handlers) return
+    const listeners = this.#events.get(event)
+    if (!listeners) return
 
-    for (const handler of [...handlers]) {
-      handler(eventArg)
+    for (const listener of [...listeners]) {
+      listener(eventArg)
     }
   }
 
-  on<Event extends keyof EventList> (event: Event, handler: (event: EventList[Event]) => void) {
-    let handlers = this.#events.get(event)
+  on<Event extends keyof EventList> (event: Event, listener: (event: EventList[Event]) => void) {
+    let listeners = this.#events.get(event)
 
-    if (!handlers) {
-      handlers = new Set()
-      this.#events.set(event, handlers)
+    if (!listeners) {
+      listeners = new Set()
+      this.#events.set(event, listeners)
     }
 
-    handlers.add(handler as Handler)
+    listeners.add(listener as Listener)
   }
 
-  once<Event extends keyof EventList> (event: Event, handler: (event: EventList[Event]) => void) {
+  once<Event extends keyof EventList> (event: Event, listener: (event: EventList[Event]) => void) {
     const wrapper = (params: any) => {
       this.off(event, wrapper)
-      handler(params)
+      listener(params)
     }
 
     this.on(event, wrapper)
   }
 
-  off<Event extends keyof EventList> (event: Event, handler: (event: EventList[Event]) => void) {
-    let handlers = this.#events.get(event)
+  off<Event extends keyof EventList> (event: Event, listener: (event: EventList[Event]) => void) {
+    let listeners = this.#events.get(event)
     
-    if (!handlers) {
-      handlers = new Set<Handler>()
-      this.#events.set(event, handlers)
+    if (!listeners) {
+      listeners = new Set<Listener>()
+      this.#events.set(event, listeners)
     }
 
-    handlers.delete(handler as Handler)
+    listeners.delete(listener as Listener)
   }
 
   clear<Event extends keyof EventList> (event: Event) {

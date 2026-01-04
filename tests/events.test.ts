@@ -82,7 +82,7 @@ describe('Events (Emitter)', () => {
     expect(called).toBe(0)
   })
 
-  it('mismo handler varias veces sobre sobre un mismo evento', () => {
+  it('mismo listener varias veces sobre sobre un mismo evento', () => {
     let called = 0
 
     const cb = () => called++
@@ -96,7 +96,7 @@ describe('Events (Emitter)', () => {
     expect(called).toBe(2)
   })
 
-  it('multiples handlers (anónimos) y emits sobre un mismo evento', () => {
+  it('listeners anónimos sobre un mismo evento', () => {
     let called = 0
 
     emitter.on('test-event', () => called++)
@@ -116,7 +116,7 @@ describe('Events (Emitter)', () => {
 
     /* Anidar on() y once(), sin importar el orden,
     lo único que hace es retrasar (en emits) el último listener.
-    Sin una copia del array que desligue la referencia en memoria (como [...handlers]),
+    Sin una copia del array que desligue la referencia en memoria (como [...listeners]),
     no habría ningún retraso, y habrían más errores */
 
     emitter.on('test-event', bigCallback)
