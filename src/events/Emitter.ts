@@ -7,8 +7,9 @@ así que una buena solución actual es esto */
 
 type EventMap = object
 type Listener = (arg: unknown) => void
+type DefaultEventList = Record<string | number | symbol, any>
 
-export class Emitter<EventList extends EventMap> {
+export class Emitter<EventList extends EventMap = DefaultEventList> {
   #events = new Map<keyof EventList, Set<Listener>>()
 
   emit<Event extends keyof EventList> (event: Event, eventArg: EventList[Event]) {
