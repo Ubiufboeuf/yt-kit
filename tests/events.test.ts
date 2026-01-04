@@ -1,4 +1,4 @@
-import { describe, expect, it, mock } from 'bun:test'
+import { describe, expect, it } from 'bun:test'
 import { Emitter } from '../src/events/Emitter'
 import type { AppEvents, EmitterArgs } from '../src/types/emitterTypes'
 import { beforeEach } from 'node:test'
