@@ -1,7 +1,6 @@
-import { describe, expect, it } from 'bun:test'
+import { beforeEach, describe, expect, it } from 'bun:test'
 import { Emitter } from '../src/events/Emitter'
 import type { AppEvents, EmitterArgs } from '../src/types/emitterTypes'
-import { beforeEach } from 'node:test'
 
 describe('Events (Emitter)', () => {
   const emitter = new Emitter<AppEvents>()
