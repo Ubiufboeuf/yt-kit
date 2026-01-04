@@ -64,6 +64,11 @@ export class Emitter<EventList extends EventMap = DefaultEventList> {
     }
   }
 
+  listenerCount<Event extends keyof EventList> (event: Event) {
+    const listeners = this.#events.get(event)
+    return listeners?.size ?? 0
+  }
+
   clear<Event extends keyof EventList> (event: Event) {
     this.#events.delete(event)
   }
