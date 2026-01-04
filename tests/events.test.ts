@@ -15,7 +15,23 @@ describe('Events (Emitter)', () => {
     emitter = new Emitter<AppEvents>()
   })
   
-  it('funcionamiento de on() y emit()', () => {
+  it('funcionamiento de emit() sin eventos', () => {
+    expect(() => {
+      emitter.emit('test-event', '')
+      emitter.emit('event', 0)
+    }).not.toThrow()
+  })
+
+  it('no debe ejecutar funciones de otros eventos', () => {
+    let called = false
+    
+    emitter.on('test-event', () => called = true)    
+    emitter.emit('event', 0)
+
+    expect(called).toBeFalse()
+  })
+  
+  it('funcionamiento de on()', () => {
     emitter.on('test-event', cb)
     emitter.emit('test-event', testParam)
     expect(paramFromEvent).toBe(testParam)
