@@ -38,7 +38,21 @@ describe('Events (Emitter)', () => {
     expect(paramFromEvent).toBeFalsy()
   })
 
-  it('multiples handlers y emits sobre un mismo evento', () => {
+  it('mismo handler varias veces sobre sobre un mismo evento', () => {
+    let called = 0
+
+    const cb = () => called++
+
+    emitter.on('test-event', cb)
+    emitter.on('test-event', cb)
+
+    emitter.emit('test-event', 'a')
+    emitter.emit('test-event', 'aa')
+
+    expect(called).toBe(2)
+  })
+
+  it('multiples handlers (anónimos) y emits sobre un mismo evento', () => {
     let called = 0
 
     emitter.on('test-event', () => called++)
