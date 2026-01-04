@@ -47,6 +47,18 @@ describe('Events (Emitter)', () => {
     emitter.emit('test-event', '')
     expect(called).toBe(0)
   })
+
+  it('limpiar once() antes de ejecutarse', () => {
+    let called = 0
+    const cb = () => called++
+
+    emitter.once('test-event', cb)
+    emitter.off('test-event', cb)
+    
+    emitter.emit('test-event', '')
+
+    expect(called).toBe(0)
+  })
   
   it('funcionamiento de off()', () => {
     let called = 0
