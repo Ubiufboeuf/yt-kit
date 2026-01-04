@@ -11,6 +11,8 @@
     "yt-dlp",     // yt-dlp/, yt-dlp-downloader/,
     "logs",       // cualquier log
     "dx",         // developer experience
+    "events",     // eventos
+    "test",       // tests (no debe usarse junto al tipo de commit test)
   ],
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.importModuleSpecifierEnding": "auto",
