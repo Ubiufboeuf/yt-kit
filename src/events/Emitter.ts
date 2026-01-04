@@ -37,6 +37,8 @@ export class Emitter<EventList extends EventMap> {
       listener(params)
     }
 
+    wrapper.listener = listener
+
     this.on(event, wrapper)
   }
 
@@ -44,8 +46,17 @@ export class Emitter<EventList extends EventMap> {
     const listeners = this.#events.get(event)
     
     if (!listeners) return
-    
-    listeners.delete(listener as Listener)
+
+    const deleted = listeners.delete(listener as Listener)
+
+    if (!deleted) {
+      // Eliminar wrappers, como los de once()
+      for (const l of listeners) {
+        if ((l as any).listener !== listener) continue
+        
+        listeners.delete(l)
+      }
+    }
 
     if (listeners.size === 0) {
       this.#events.delete(event)
