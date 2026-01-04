@@ -7,7 +7,7 @@ type DefaultEventList = Record<string | number | symbol, any>
 export class Emitter<EventList extends EventMap = DefaultEventList> {
   #events = new Map<keyof EventList, Set<Listener>>()
 
-  emit<Event extends keyof EventList> (event: Event, eventArg: EventList[Event]) {
+  emit<Event extends keyof EventList> (event: Event, eventArg?: EventList[Event]) {
     const listeners = this.#events.get(event)
     if (!listeners) return
 
