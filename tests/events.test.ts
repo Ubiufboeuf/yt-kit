@@ -4,10 +4,10 @@ import type { AppEvents, EmitterArgs } from '../src/types/emitterTypes'
 import { beforeEach } from 'node:test'
 
 describe('Events (Emitter)', () => {
-  let emitter = new Emitter<AppEvents>()
+  const emitter = new Emitter<AppEvents>()
 
   beforeEach(() => {
-    emitter = new Emitter<AppEvents>()
+    emitter.resetEmitter()
   })
   
   it('funcionamiento de emit() sin eventos', () => {
