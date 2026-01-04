@@ -190,4 +190,13 @@ describe('Events (Emitter)', () => {
     emitter.emit('test-event', '')
     expect(callCount).toBe(3) // Solo cb1 sumó
   })
+
+  it('debe mantener el contexto si se pasa una función bindeada', () => {
+    const context = { name: 'test', call () { this.name = 'changed' } }
+    
+    emitter.on('test-event', context.call.bind(context))
+    emitter.emit('test-event', '')
+
+    expect(context.name).toBe('changed')
+  })
 })
