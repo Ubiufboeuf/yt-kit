@@ -9,10 +9,10 @@ type EventMap = object
 type Handler = (arg: unknown) => void
 
 export class Emitter<EventList extends EventMap> {
-  private events = new Map<keyof EventList, Set<Handler>>()
+  #events = new Map<keyof EventList, Set<Handler>>()
 
   emit<Event extends keyof EventList> (event: Event, eventArg: EventList[Event]) {
-    const handlers = this.events.get(event)
+    const handlers = this.#events.get(event)
     if (!handlers) return
 
     for (const handler of [...handlers]) {
@@ -21,11 +21,11 @@ export class Emitter<EventList extends EventMap> {
   }
 
   on<Event extends keyof EventList> (event: Event, handler: (event: EventList[Event]) => void) {
-    let handlers = this.events.get(event)
+    let handlers = this.#events.get(event)
 
     if (!handlers) {
       handlers = new Set()
-      this.events.set(event, handlers)
+      this.#events.set(event, handlers)
     }
 
     handlers.add(handler as Handler)
@@ -41,21 +41,21 @@ export class Emitter<EventList extends EventMap> {
   }
 
   off<Event extends keyof EventList> (event: Event, handler: (event: EventList[Event]) => void) {
-    let handlers = this.events.get(event)
+    let handlers = this.#events.get(event)
     
     if (!handlers) {
       handlers = new Set<Handler>()
-      this.events.set(event, handlers)
+      this.#events.set(event, handlers)
     }
 
     handlers.delete(handler as Handler)
   }
 
   clear<Event extends keyof EventList> (event: Event) {
-    this.events.delete(event)
+    this.#events.delete(event)
   }
 
   resetEmitter () {
-    this.events = new Map()
+    this.#events = new Map()
   }
 }
