@@ -144,4 +144,29 @@ describe('Events (Emitter)', () => {
 
     expect(result).toBe('cde')
   })
+
+  it('debe reportar correctamente el conteo de suscriptores', () => {
+    const event = 'test-event'
+    const cb1 = () => {}
+    const cb2 = () => {}
+
+    // 1. Estado inicial (nunca registrado)
+    expect(emitter.listenerCount(event)).toBe(0)
+
+    // 2. Al añadir uno
+    emitter.on(event, cb1)
+    expect(emitter.listenerCount(event)).toBe(1)
+
+    // 3. Al añadir otro (mismo evento)
+    emitter.on(event, cb2)
+    expect(emitter.listenerCount(event)).toBe(2)
+
+    // 4. Al quitar uno
+    emitter.off(event, cb1)
+    expect(emitter.listenerCount(event)).toBe(1)
+
+    // 5. Al limpiar el evento
+    emitter.clear(event)
+    expect(emitter.listenerCount(event)).toBe(0)
+  })
 })
