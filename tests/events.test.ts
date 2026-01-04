@@ -168,4 +168,26 @@ describe('Events (Emitter)', () => {
     emitter.clear(event)
     expect(emitter.listenerCount(event)).toBe(0)
   })
+
+  it('no debe saltarse listeners si uno se elimina a sí mismo o a otros durante el emit', () => {
+    let callCount = 0
+    const cb1 = () => {
+      callCount++
+      emitter.off('test-event', cb2) // cb1 intenta matar a cb2
+    }
+    const cb2 = () => {
+      callCount++
+    }
+
+    emitter.on('test-event', cb1)
+    emitter.on('test-event', cb2)
+
+    emitter.emit('test-event', '')
+
+    // Gracias a [...listeners], ambos deben haberse ejecutado en este ciclo
+    expect(callCount).toBe(2)
+    // Pero en el siguiente emit, cb2 ya no debe estar
+    emitter.emit('test-event', '')
+    expect(callCount).toBe(3) // Solo cb1 sumó
+  })
 })
