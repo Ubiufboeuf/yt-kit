@@ -41,14 +41,15 @@ export class Emitter<EventList extends EventMap> {
   }
 
   off<Event extends keyof EventList> (event: Event, listener: (event: EventList[Event]) => void) {
-    let listeners = this.#events.get(event)
+    const listeners = this.#events.get(event)
     
-    if (!listeners) {
-      listeners = new Set<Listener>()
-      this.#events.set(event, listeners)
-    }
-
+    if (!listeners) return
+    
     listeners.delete(listener as Listener)
+
+    if (listeners.size === 0) {
+      this.#events.delete(event)
+    }
   }
 
   clear<Event extends keyof EventList> (event: Event) {
