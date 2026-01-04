@@ -15,7 +15,7 @@ interface CompareOptions {
 
 function compareFormats ({ a, b, compareResolution, type }: CompareParams) {
   const canCompareQuality = (type === 'video') && compareResolution && (a.quality !== null) && (b.quality !== null)
-  const canCompareResolution = (type === 'video') && compareResolution && (a.height !== null) && (b.height !== null)
+  const canCompareResolution = (type !== 'audio') && compareResolution && (a.height !== null) && (b.height !== null)
   const canCompareFps = (type === 'video') && (a.fps !== null) && (b.fps !== null)
   const canCompareAsr = (type === 'audio') && (a.asr !== null) && (b.asr !== null)
   const canCompareTbr = (a.tbr !== null) && (b.tbr !== null)

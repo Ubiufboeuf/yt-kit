@@ -9,5 +9,7 @@ export type FormatsToFind =
 | 'worst-video'
 | 'best-audio'
 | 'worst-audio'
+| 'best-storyboard'
+| 'worst-storyboard'
 
-export type MediaType = 'audio' | 'video'
+export type MediaType = 'audio' | 'video' | 'sb'
