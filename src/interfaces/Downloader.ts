@@ -18,6 +18,12 @@ export interface DownloadTasksOptions {
 }
 
 export interface DownloadResult {
+  type: string
+  status: string
   path: string
-  duration: number
+  id: string
+  ext: string
+  title: string
+  size: number
+  alreadyDownloaded: boolean | string
 }
