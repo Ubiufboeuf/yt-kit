@@ -10,9 +10,28 @@ export class YtDlpDownloader implements Downloader {
   async download (ytId: string, options: DownloadTasksOptions): Promise<DownloadResult> {
     const args = this.buildYtDlpArgs(ytId, options)
     
-    const output = await spawnAsync('yt-dlp', args, { showOutput: true })
-    const result = parseDownloadOutput(output, options.simulate)
+    let output
+    try {
+      output = await spawnAsync('yt-dlp', args, { showOutput: true })
+    } catch {
+      console.error('Error en la descarga')
+    }
 
+    if (!output) {
+      return {
+        ext: 'NA',
+        id: ytId,
+        path: 'NA',
+        size: -1,
+        status: 'failed',
+        title: 'NA',
+        type: 'download:result',
+        alreadyDownloaded: 'NA'
+      }
+    }
+    
+    const result = parseDownloadOutput(output, options.simulate)
+    
     return result
   }
 
