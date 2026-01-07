@@ -51,6 +51,19 @@ function compareFormats ({ a, b, compareResolution, type }: CompareParams) {
   return { aScore, bScore }
 }
 
+/**
+ * Compara dos formatos y devuelve el mejor.
+ * 
+ * Soporta un objeto para opciones, con `type` y `compareResolution`.
+ * 
+ * @param a Formato A
+ * @param b Formato B
+ * @param object
+ * * `type`: Tipo de multimedia: `video` / `audio` / `sb` (storyboard).
+ * * `compareResolution`: Si debe comparar la resolución del video. No sirve con audios.
+ * 
+ * @returns `a|b` El mejor formato entre A y B
+ */
 export function getBetterFormat (a: YtDlpFormat | undefined, b: YtDlpFormat | undefined, { type, compareResolution }: CompareOptions) {
   if (!a || !b) return
 
@@ -59,6 +72,19 @@ export function getBetterFormat (a: YtDlpFormat | undefined, b: YtDlpFormat | un
   return aScore > bScore ? a : b
 }
 
+/**
+ * Compara dos formatos y devuelve el peor.
+ * 
+ * Soporta un objeto para opciones, con `type` y `compareResolution`.
+ * 
+ * @param a Formato A
+ * @param b Formato B
+ * @param object
+ * * `type`: Tipo de multimedia: `video` / `audio` / `sb` (storyboard).
+ * * `compareResolution`: Si debe comparar la resolución del video. No sirve con audios.
+ * 
+ * @returns `a|b` El peor formato entre A y B
+ */
 export function getWorseFormat (a: YtDlpFormat | undefined, b: YtDlpFormat | undefined, { type, compareResolution }: CompareOptions) {
   if (!a || !b) return
 

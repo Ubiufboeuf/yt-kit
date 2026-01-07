@@ -3,6 +3,21 @@ import type { YtDlpFormat } from '../types/ytDlpFormatTypes'
 import { getBetterFormat, getWorseFormat } from '../lib/compareFormats'
 import { getAllFormats } from './getAllFormats'
 
+/**
+ * Devuelve el ID del formato deseado del video especificado.
+ * 
+ * Aprovecha `CacheManager` para optimizar las peticiones recurrentes sobre el mismo video.
+ * 
+ * @param ytId ID del video
+ * @param formatToFind Formato para buscar (360p, 1080p, best-video)
+ * @returns Una promesa que resuelve en un objeto con `foundSpecific` y `formatId`
+ * 
+ * @example
+ * ```js
+ * const format = await findFormatId('dQw4w9WgXcQ', 'best-audio')
+ * console.log(format) // { foundSpecific: boolean, formatId: string | undefined }
+ * ```
+ */
 export async function findFormatId (ytId: string, formatToFind: FormatsToFind) {
   const isSpecificResolution = Boolean(formatToFind.match(/\d/))
   let foundSpecific = isSpecificResolution ? false : 'N/A'

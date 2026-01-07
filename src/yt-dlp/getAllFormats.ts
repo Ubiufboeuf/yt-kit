@@ -2,6 +2,20 @@ import { spawnAsync } from '../lib/spawnAsync'
 import { cache } from '../cache/CacheManager'
 import type { YtDlpFormat } from '../types/ytDlpFormatTypes'
 
+/**
+ * Obtiene todos los formatos de un video.
+ * 
+ * Aprovecha CacheManager para optimizar las peticiones recurrentes sobre el mismo video.
+ * 
+ * @param ytId ID del video
+ * @returns Una lista con todos los formatos del video
+ * 
+ * @example
+ * ```js
+ * const formats = await getAllFormats(`dQw4w9WgXcQ`)
+ * console.log(formats) // [{ id, resolution, ... }, ...]
+ * ```
+ */
 export async function getAllFormats (ytId: string) {
   const args = ['--print', '%(formats)j', ytId]
   
