@@ -28,10 +28,13 @@ export async function findFormatId (ytId: string, formatToFind: FormatsToFind) {
   let worstVideo: YtDlpFormat | undefined = undefined
   let bestAudio: YtDlpFormat | undefined = undefined
   let worstAudio: YtDlpFormat | undefined = undefined
+  let bestStoryboard: YtDlpFormat | undefined = undefined
+  let worstStoryboard: YtDlpFormat | undefined = undefined
   let desiredFormat: YtDlpFormat | undefined = undefined
 
   for (const format of formats) {
     const audioOnly = format.resolution === 'audio only'
+    const isStoryboard = format.format_note === 'storyboard'
     
     if (isSpecificResolution && format.format_note === formatToFind) {
       foundSpecific = true
@@ -42,6 +45,9 @@ export async function findFormatId (ytId: string, formatToFind: FormatsToFind) {
     if (audioOnly) {
       bestAudio = getBetterFormat(bestAudio, format, { compareResolution: false, type: 'audio' }) ?? format
       worstAudio = getWorstFormat(worstAudio, format, { compareResolution: false, type: 'audio' }) ?? format
+    } else if (isStoryboard) {
+      bestStoryboard = getBetterFormat(bestStoryboard, format, { compareResolution: false, type: 'sb' }) ?? format
+      worstStoryboard = getWorstFormat(worstStoryboard, format, { compareResolution: false, type: 'sb' }) ?? format
     } else {
       bestVideo = getBetterFormat(bestVideo, format, { compareResolution: true, type: 'video' }) ?? format
       worstVideo = getWorstFormat(worstVideo, format, { compareResolution: true, type: 'video' }) ?? format
@@ -53,7 +59,9 @@ export async function findFormatId (ytId: string, formatToFind: FormatsToFind) {
       'best-video': bestVideo,
       'worst-video': worstVideo,
       'best-audio': bestAudio,
-      'worst-audio': worstAudio
+      'worst-audio': worstAudio,
+      'best-storyboard': bestStoryboard,
+      'worst-storyboard': worstStoryboard
     } as const
 
     desiredFormat = formats[formatToFind as keyof typeof formats]

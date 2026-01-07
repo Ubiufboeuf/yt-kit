@@ -5,3 +5,8 @@ export const PATTERNS = {
   ID: '%(id)s',
   YT_ID: '%(ytId)s'
 } as const
+
+export const DOWNLOAD_MARKERS = {
+  startMarker: '%$#>RESULT>:',
+  endMarker: ':<RESULT%$#|'
+}

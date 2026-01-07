@@ -3,7 +3,21 @@ import { streamLog } from './logger'
 import { config } from '../config/Configuration'
 import type { CommandKey } from '../types/commandsTypes'
 
-export function spawnAsync (command: CommandKey, args: string[], showOutput?: boolean) {
+interface SpawnOptions {
+  showOutput?: boolean
+}
+
+const defaultOptions: SpawnOptions = {
+  showOutput: false
+}
+
+export function spawnAsync (command: CommandKey, args: string[], options?: SpawnOptions) {
+  const spawnOptions = {
+    ...defaultOptions,
+    ...options
+  }
+  const { showOutput } = spawnOptions
+  
   const configuredCommands = config.get('commands')
   const _command = configuredCommands?.[command]
   
