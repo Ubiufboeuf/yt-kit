@@ -10,7 +10,7 @@ export class YtDlpDownloader implements Downloader {
   async download (ytId: string, options: DownloadTasksOptions): Promise<DownloadResult> {
     const args = this.buildYtDlpArgs(ytId, options)
     
-    const output = await spawnAsync('yt-dlp', args, true)
+    const output = await spawnAsync('yt-dlp', args, { showOutput: true })
     const result = parseDownloadOutput(output, options.simulate)
 
     return result
