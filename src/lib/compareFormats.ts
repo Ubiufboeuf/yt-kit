@@ -85,7 +85,7 @@ export function getBetterFormat (a: YtDlpFormat | undefined, b: YtDlpFormat | un
  * 
  * @returns `a|b` El peor formato entre A y B
  */
-export function getWorstFormat (a: YtDlpFormat | undefined, b: YtDlpFormat | undefined, { type, compareResolution }: CompareOptions) {
+export function getWorseFormat (a: YtDlpFormat | undefined, b: YtDlpFormat | undefined, { type, compareResolution }: CompareOptions) {
   if (!a || !b) return
 
   const { aScore, bScore } = compareFormats({ a, b, type, compareResolution })

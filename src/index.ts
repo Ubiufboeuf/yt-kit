@@ -14,7 +14,7 @@ export { getFromDisk } from './cache/getFromDisk'
 export { saveInDisk } from './cache/saveInDisk'
 
 // Helpers y utilidades
-export { getBetterFormat, getWorstFormat } from './lib/compareFormats'
+export { getBetterFormat, getWorseFormat } from './lib/compareFormats'
 export { resolveFilenamePattern } from './lib/resolveFilenamePattern'
 export { expandPattern } from './lib/expandPattern'
 export { resolvePath } from './lib/resolvePath'

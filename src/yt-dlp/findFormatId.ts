@@ -1,6 +1,6 @@
 import type { FormatsToFind } from '../types/videoTypes'
 import type { YtDlpFormat } from '../types/ytDlpFormatTypes'
-import { getBetterFormat, getWorstFormat } from '../lib/compareFormats'
+import { getBetterFormat, getWorseFormat } from '../lib/compareFormats'
 import { getAllFormats } from './getAllFormats'
 
 /**
@@ -44,13 +44,13 @@ export async function findFormatId (ytId: string, formatToFind: FormatsToFind) {
     
     if (audioOnly) {
       bestAudio = getBetterFormat(bestAudio, format, { compareResolution: false, type: 'audio' }) ?? format
-      worstAudio = getWorstFormat(worstAudio, format, { compareResolution: false, type: 'audio' }) ?? format
+      worstAudio = getWorseFormat(worstAudio, format, { compareResolution: false, type: 'audio' }) ?? format
     } else if (isStoryboard) {
       bestStoryboard = getBetterFormat(bestStoryboard, format, { compareResolution: false, type: 'sb' }) ?? format
-      worstStoryboard = getWorstFormat(worstStoryboard, format, { compareResolution: false, type: 'sb' }) ?? format
+      worstStoryboard = getWorseFormat(worstStoryboard, format, { compareResolution: false, type: 'sb' }) ?? format
     } else {
       bestVideo = getBetterFormat(bestVideo, format, { compareResolution: true, type: 'video' }) ?? format
-      worstVideo = getWorstFormat(worstVideo, format, { compareResolution: true, type: 'video' }) ?? format
+      worstVideo = getWorseFormat(worstVideo, format, { compareResolution: true, type: 'video' }) ?? format
     }
   }
 
