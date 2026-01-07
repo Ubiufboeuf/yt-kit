@@ -14,8 +14,8 @@ const multipliers: Record<TimeUnit, number> = {
  * Si `unit` no es válido, devuelve `amount`.
  * 
  * ```js
- * convertTime(7, 'second') // 7000ms
- * convertTime(4, 'lemon') // 4ms
+ * timeToMs(7, 'second') // 7000 (7000ms)
+ * timeToMs(4, 'lemon') // 4 (4ms)
  * ```
  * 
  * @returns Devuelve en milisegundos la cantidad (`amount`) de unidad (`unit`) especificada
