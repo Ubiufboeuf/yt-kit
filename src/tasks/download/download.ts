@@ -26,7 +26,8 @@ function formDownloadTaskOptions (type: DownloadType, options: DownloadOptions):
     id: `${options.formatId}`,
     type,
     outputDir: options.outputDir ?? '.',
-    filename: options.filename ?? DEFAULT_FILENAME
+    filename: options.filename ?? DEFAULT_FILENAME,
+    simulate: options.simulate ?? false
   }
 
   return taskOptions

@@ -6,6 +6,7 @@ export interface DownloadOptions {
   formatId: string | number
   outputDir?: string
   filename?: string
+  simulate?: boolean
 }
 
 export interface DownloadTasksOptions {
@@ -13,6 +14,7 @@ export interface DownloadTasksOptions {
   type: 'video' | 'audio'
   outputDir: string
   filename: string
+  simulate: boolean
 }
 
 export interface DownloadResult {
