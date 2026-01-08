@@ -9,7 +9,7 @@ export interface AppEvents {
   event: number
 }
 
-// Estos quedan por si quien se use la instancia de Emitter
+// Estos quedan por si quien use la instancia de Emitter
 // lo llegase a precisar, pero se pueden crear en el momento
 export type EmitterEvent = EventName<AppEvents>
 export type EmitterArgs<Event extends EmitterEvent> = AppEvents[Event]
