@@ -1,5 +1,6 @@
 {
   "name": "@yt-kit/core",
+  "description": "Kit de herramientas para el manejo de multimedia orientada a videos",
   "version": "1.2.0",
   "type": "module",
   "publishConfig": {
