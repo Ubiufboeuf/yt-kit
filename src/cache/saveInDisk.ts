@@ -3,7 +3,14 @@ import type { CachedData, CacheKey } from '../types/cacheTypes'
 import { dirname } from 'node:path'
 import { getKeyPath } from '../lib/getKeyPath'
 
-// Esta función es solo para caché
+/**
+ * Cachea datos en el almacenamiento.
+ * 
+ * Esta función está pensada sólo para caché, no para guardar datos arbitrarios en disco.
+ * 
+ * @param key Clave de caché. Usado para darle nombre al archivo con la caché.
+ * @param value Valor para cachear.
+ */
 export async function saveInDisk (key: CacheKey, value: CachedData) {
 const cachePath = getKeyPath(key)
   if (!cachePath) return

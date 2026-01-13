@@ -14,8 +14,8 @@ const multipliers: Record<TimeUnit, number> = {
  * Si `unit` no es válido, devuelve `amount`.
  * 
  * ```js
- * convertTime(7, 'second') // 7000ms
- * convertTime(4, 'lemon') // 4ms
+ * timeToMs(7, 'second') // 7000 (7000ms)
+ * timeToMs(4, 'lemon') // 4 (4ms)
  * ```
  * 
  * @returns Devuelve en milisegundos la cantidad (`amount`) de unidad (`unit`) especificada
@@ -26,6 +26,18 @@ export function timeToMs (amount: number, unit: TimeUnit): number {
   return ms
 }
 
+/**
+ * Recibe una cantidad de milisegundos (`ms`) y una unidad (`unit`) a la que convertir ese tiempo.
+ * 
+ * Si `unit` no es válido, devuelve `ms`.
+ * 
+ * ```js
+ * msToTime(7000, 'second') // 7 (7s)
+ * msToTime(4, 'lemon') // 4 (4ms)
+ * ```
+ * 
+ * @returns Devuelve los milisegundos convertidos a la unidad indicada.
+ */
 export function msToTime (ms: number, unit: TimeUnit): number {
   if (!multipliers[unit]) return ms
   const time = ms / multipliers[unit]
