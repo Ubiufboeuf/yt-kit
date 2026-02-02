@@ -1,11 +1,9 @@
 {
   "lockfileVersion": 1,
+  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "@yt-kit/core",
-      "dependencies": {
-        "typescript": "5",
-      },
       "devDependencies": {
         "@eslint/js": "9.39.1",
         "@stylistic/eslint-plugin": "5.6.1",
@@ -14,6 +12,7 @@
         "eslint": "9.39.1",
         "globals": "16.5.0",
         "jiti": "2.6.1",
+        "typescript": "5",
         "typescript-eslint": "8.48.1",
       },
     },
