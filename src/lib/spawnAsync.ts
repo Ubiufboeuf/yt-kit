@@ -3,12 +3,14 @@ import { streamLog } from './logger'
 import { config } from '../config/Configuration'
 import type { CommandKey } from '../types/commandsTypes'
 
-interface SpawnOptions {
+export interface SpawnOptions {
   showOutput?: boolean
+  silentOutputPatterns?: string[]
 }
 
 const defaultOptions: SpawnOptions = {
-  showOutput: false
+  showOutput: false,
+  silentOutputPatterns: []
 }
 
 export function spawnAsync (command: CommandKey, args: string[], options?: SpawnOptions) {
@@ -16,7 +18,7 @@ export function spawnAsync (command: CommandKey, args: string[], options?: Spawn
     ...defaultOptions,
     ...options
   }
-  const { showOutput } = spawnOptions
+  const { showOutput, silentOutputPatterns } = spawnOptions
   
   const configuredCommands = config.get('commands')
   const _command = configuredCommands?.[command]
@@ -33,13 +35,21 @@ export function spawnAsync (command: CommandKey, args: string[], options?: Spawn
     spawnProcess.stdout.on('data', (chunk) => {
       stdout += chunk
       const chunkStr = chunk.toString()
-      if (showOutput) streamLog('data', chunkStr)
+
+      if (!showOutput) return
+      if (silentOutputPatterns?.some((pattern) => chunkStr.includes(pattern))) return
+
+      streamLog('data', chunkStr)
     })
 
     spawnProcess.stderr.on('data', (chunk) => {
       stderr += chunk
       const chunkStr = chunk.toString()
-      if (showOutput) streamLog('err', chunkStr)
+
+      if (!showOutput) return
+      if (silentOutputPatterns?.some((pattern) => chunkStr.includes(pattern))) return
+
+      streamLog('err', chunkStr)
     })
 
     spawnProcess.on('close', (code) => {
