@@ -1,5 +1,5 @@
 import type { Downloader, DownloadTasksOptions, DownloadResult } from '../interfaces/Downloader'
-import { spawnAsync } from '../lib/spawnAsync'
+import { spawnAsync, type SpawnOptions } from '../lib/spawnAsync'
 import { resolveFilenamePattern } from '../lib/resolveFilenamePattern'
 import { parseDownloadOutput } from '../lib/parseDownloadOutput'
 import { DOWNLOAD_MARKERS } from '../lib/constants'
@@ -9,10 +9,17 @@ const { endMarker, startMarker } = DOWNLOAD_MARKERS
 export class YtDlpDownloader implements Downloader {
   async download (ytId: string, options: DownloadTasksOptions): Promise<DownloadResult> {
     const args = this.buildYtDlpArgs(ytId, options)
+    const spawnOptions: SpawnOptions = {
+      showOutput: true,
+      silentOutputPatterns: [
+        DOWNLOAD_MARKERS.startMarker,
+        DOWNLOAD_MARKERS.endMarker
+      ]
+    }
     
     let output
     try {
-      output = await spawnAsync('yt-dlp', args, { showOutput: true })
+      output = await spawnAsync('yt-dlp', args, spawnOptions)
     } catch {
       console.error('Error en la descarga')
     }
