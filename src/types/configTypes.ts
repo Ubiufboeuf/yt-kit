@@ -6,5 +6,5 @@ export type ConfigValue<T extends ConfigKey> = ConfigMap[T]
 
 export type ConfigMap = {
   'cache': CacheConfig,
-  'commands': Commands
+  'commands': Partial<Commands>
 }
