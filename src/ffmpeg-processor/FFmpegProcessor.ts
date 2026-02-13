@@ -68,12 +68,13 @@ export class FFmpegProcessor implements Processor {
     let input = 0
     
     const args = [
+      '-y',
       '-i', `${videoPath}`,
       ...validAudios.flatMap((path) => ['-i', `${path}`]),
       '-map', '0:v',
       ...validAudios.flatMap(() => ['-map', `${++input}:a`]),
-      '-c:v', 'copy', '-c:a', 'aac',
-      '-strict', 'experimental', '-shortest',
+      '-c', 'copy',
+      '-shortest',
       resolvePath(`${outputDir}/${slug}.${container}`)
     ]
 
