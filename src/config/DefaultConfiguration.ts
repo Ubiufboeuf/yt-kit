@@ -11,7 +11,9 @@ const defaultCacheConfig: CacheConfig = {
 }
 
 const defaultCommandsConfig: Commands = {
-  'yt-dlp': 'yt-dlp'
+  'yt-dlp': 'yt-dlp',
+  ffmpeg: 'ffmpeg',
+  ffprobe: 'ffprobe'
 }
 
 export const defaultConfig = new Map<ConfigKey, unknown>([
