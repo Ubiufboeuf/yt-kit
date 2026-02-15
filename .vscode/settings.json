@@ -12,7 +12,8 @@
     "logs",
     "events",
     "test",
-    "ffmpeg"
+    "ffmpeg",
+    "download"
   ],
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.importModuleSpecifierEnding": "auto",
