@@ -10,7 +10,7 @@ export class YtDlpDownloader implements Downloader {
   async download (ytId: string, options: DownloadTasksOptions): Promise<DownloadResult> {
     const args = this.buildYtDlpArgs(ytId, options)
     const spawnOptions: SpawnOptions = {
-      showOutput: true,
+      showOutput: false,
       silentOutputPatterns: [
         DOWNLOAD_MARKERS.startMarker,
         DOWNLOAD_MARKERS.endMarker

@@ -45,7 +45,7 @@ export class FFmpegProcessor implements Processor {
 
     const args = this.buildMuxArgs(video, validAudios, options)
     const spawnOptions: SpawnOptions = {
-      showOutput: true
+      showOutput: false
     }
 
     await spawnAsync('ffmpeg', args, spawnOptions)
