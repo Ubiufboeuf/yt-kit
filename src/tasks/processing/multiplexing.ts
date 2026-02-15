@@ -1,6 +1,7 @@
 import { FFmpegProcessor } from '../../ffmpeg-processor/FFmpegProcessor'
 import type { MultiplexingOptions } from '../../interfaces/Processor'
 import { basename, extname } from 'node:path'
+import { resolvePath } from '../../lib/resolvePath'
 
 export async function mux (options: MultiplexingOptions) {
   const { video, audios } = options
@@ -20,7 +21,7 @@ function formProcessTaskOptions (options: MultiplexingOptions): MultiplexingOpti
     audios,
     container: options.container ?? 'mp4',
     slug: options?.slug ?? `av-${videoSlug}`,
-    outputDir: options?.outputDir ?? '.'
+    outputDir: resolvePath(options?.outputDir ?? '.')
   }
 
   return taskOptions
