@@ -13,7 +13,8 @@
     "events",
     "test",
     "ffmpeg",
-    "download"
+    "download",
+    "processing"
   ],
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.importModuleSpecifierEnding": "auto",
