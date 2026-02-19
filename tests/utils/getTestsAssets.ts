@@ -1,4 +1,4 @@
-import { downloadAudio, downloadVideo, findFormatId, resolvePath } from '../../src'
+import { downloadAudio, downloadVideo, findFormatId } from '../../src'
 import { readdir } from 'node:fs/promises'
 import type { Result } from '../types'
 import { extname, join } from 'node:path'
@@ -81,15 +81,15 @@ export async function getTestAudio (ytId: string, testAssetsPath: string): Promi
 async function convertFileForTest (type: Type, testAssetsPath: string): Promise<Result> {
   let dir: string[] = []
   try {
-    dir = await readdir(resolvePath(testAssetsPath))
+    dir = await readdir(testAssetsPath)
   } catch {/* empty */}
   
   const file = dir.find((file) => file.includes(type))
   if (!file) return 'error'
 
   if (extname(file) !== desiredExtension[type]) {
-    const filePath = join(resolvePath(testAssetsPath), file)
-    const outputFilePath = join(resolvePath(testAssetsPath), `${type}${desiredExtension[type]}`)
+    const filePath = join(testAssetsPath, file)
+    const outputFilePath = join(testAssetsPath, `${type}${desiredExtension[type]}`)
 
     console.log(`Preparando ${type} para los tests`)
     await spawnAsync('ffmpeg', getMediaArgs(type, filePath, outputFilePath))
