@@ -21,7 +21,7 @@ function formProcessTaskOptions (options: MultiplexingOptions): MultiplexingOpti
     audios,
     container: options.container ?? 'mp4',
     slug: options?.slug ?? `av-${videoSlug}`,
-    outputDir: resolvePath(options?.outputDir ?? '.')
+    outputDir: resolvePath(options?.outputDir ?? './')
   }
 
   return taskOptions
