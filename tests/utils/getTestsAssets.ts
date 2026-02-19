@@ -52,7 +52,7 @@ export async function getTestVideo (ytId: string, testAssetsPath: string): Promi
   if (downloadResult?.status === 'success') console.log('Descargado')
   else console.log('Error en la descarga')
 
-  const result = await convertFileForTest('video', ytId, testAssetsPath)
+  const result = await convertFileForTest('video', testAssetsPath)
 
   return result
 }
@@ -73,12 +73,12 @@ export async function getTestAudio (ytId: string, testAssetsPath: string): Promi
   if (downloadResult?.status === 'success') console.log('Descargado')
   else console.log('Error en la descarga')
 
-  const result = await convertFileForTest('audio', ytId, testAssetsPath)
+  const result = await convertFileForTest('audio', testAssetsPath)
   
   return result
 }
 
-async function convertFileForTest (type: Type, ytId: string, testAssetsPath: string): Promise<Result> {
+async function convertFileForTest (type: Type, testAssetsPath: string): Promise<Result> {
   let dir: string[] = []
   try {
     dir = await readdir(resolvePath(testAssetsPath))
