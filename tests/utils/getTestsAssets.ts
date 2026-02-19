@@ -36,7 +36,7 @@ function getMediaArgs (type: Type, filePath: string, outputFilePath: string): st
   return args
 }
 
-export async function getTestVideo (ytId: string, testAssetsPath: string): Promise<Result> {
+export async function getTestVideo (ytId: string, testAssetsPath: string, videoSlug: string): Promise<Result> {
   const videoFormat = await findFormatId(ytId, 'worst-video')
   if (!videoFormat.formatId) {
     console.error('No se encontró el formato del video')
@@ -52,12 +52,12 @@ export async function getTestVideo (ytId: string, testAssetsPath: string): Promi
   if (downloadResult?.status === 'success') console.log('Descargado')
   else console.log('Error en la descarga')
 
-  const result = await convertFileForTest('video', testAssetsPath)
+  const result = await convertFileForTest('video', testAssetsPath, videoSlug)
 
   return result
 }
 
-export async function getTestAudio (ytId: string, testAssetsPath: string): Promise<Result> {
+export async function getTestAudio (ytId: string, testAssetsPath: string, audioSlug: string): Promise<Result> {
   const audioFormat = await findFormatId(ytId, 'worst-audio')
   if (!audioFormat.formatId) {
     console.error('No se encontró el formato del audio:', audioFormat)
@@ -73,32 +73,32 @@ export async function getTestAudio (ytId: string, testAssetsPath: string): Promi
   if (downloadResult?.status === 'success') console.log('Descargado')
   else console.log('Error en la descarga')
 
-  const result = await convertFileForTest('audio', testAssetsPath)
+  const result = await convertFileForTest('audio', testAssetsPath, audioSlug)
   
   return result
 }
 
-async function convertFileForTest (type: Type, testAssetsPath: string): Promise<Result> {
+async function convertFileForTest (type: Type, testAssetsPath: string, slug: string): Promise<Result> {
   let dir: string[] = []
   try {
     dir = await readdir(testAssetsPath)
   } catch {/* empty */}
   
-  const file = dir.find((file) => file.includes(type))
+  const file = dir.find((file) => file.includes(slug))
   if (!file) return 'error'
 
   if (extname(file) !== desiredExtension[type]) {
     const filePath = join(testAssetsPath, file)
-    const outputFilePath = join(testAssetsPath, `${type}${desiredExtension[type]}`)
+    const outputFilePath = join(testAssetsPath, `${slug}${desiredExtension[type]}`)
 
     console.log(`Preparando ${type} para los tests`)
     await spawnAsync('ffmpeg', getMediaArgs(type, filePath, outputFilePath))
 
     // console.log('Borrando descargado:', filePath)
     await rm(filePath)
-  } else {
-    console.log(`${cap(type)} preprado para los tests`)
   }
+
+  console.log(`${cap(type)} preprado para los tests`)
 
   return 'success'
 }
