@@ -19,6 +19,7 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 # Específico del proyecto
 bin/
 storage/
+tests/assets/
 
 # Otros
 .idea

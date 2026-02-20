@@ -4,6 +4,7 @@ import { DEFAULT_FILENAME } from '../../lib/constants'
 import type { DownloadOptions, DownloadTasksOptions } from '../../interfaces/Downloader'
 import { YtDlpDownloader } from '../../yt-dlp-downloader/YtDlpDownloader'
 import type { DownloadType } from '../../types/downloaderTaskTypes'
+import { resolvePath } from '../../lib/resolvePath'
 
 export async function downloadVideo (ytId: string, options: DownloadOptions) {
   if (!ytId || !options.formatId) return
@@ -25,7 +26,7 @@ function formDownloadTaskOptions (type: DownloadType, options: DownloadOptions):
   const taskOptions: DownloadTasksOptions = {
     id: `${options.formatId}`,
     type,
-    outputDir: options.outputDir ?? '.',
+    outputDir: resolvePath(options.outputDir ?? './'),
     filename: options.filename ?? DEFAULT_FILENAME,
     simulate: options.simulate ?? false
   }

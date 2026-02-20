@@ -1,17 +1,20 @@
 // las rutas en comentarios parten de src/
 {
   "conventionalCommits.scopes": [
-    "api",        // index.ts
-    "task",       // tasks/
-    "lib",        // lib/
-    "cache",      // cache/
-    "config",     // config/
-    "types",      // types/
-    "validation", // validations/
-    "yt-dlp",     // yt-dlp/, yt-dlp-downloader/,
-    "logs",       // cualquier log
-    "events",     // eventos
-    "test",       // tests (no debe usarse junto al tipo de commit test)
+    "api",
+    "task",
+    "lib",
+    "cache",
+    "config",
+    "types",
+    "validation",
+    "yt-dlp",
+    "logs",
+    "events",
+    "test",
+    "ffmpeg",
+    "download",
+    "processing"
   ],
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.importModuleSpecifierEnding": "auto",
