@@ -8,10 +8,7 @@ export function resolvePath (input: string): string {
 
   if (input.includes(' '))
     throw new Error('La ruta no puede tener espacios')
-
-  if (input === '.' || input === '..')
-    throw new Error(`'${input}' No es una ruta válida. Tal vez faltó agregar '/'?`)
-
+  
   let p = input
   
   if (input.startsWith('~')) {

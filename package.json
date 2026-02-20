@@ -27,10 +27,8 @@
     "build:debug": "tsc -p tsconfig.build.json",
     "prepublishOnly": "bun run build"
   },
-  "dependencies": {
-    "typescript": "5"
-  },
   "devDependencies": {
+    "typescript": "5",
     "@eslint/js": "9.39.1",
     "@stylistic/eslint-plugin": "5.6.1",
     "@types/bun": "latest",
